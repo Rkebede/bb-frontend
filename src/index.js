@@ -18,9 +18,9 @@ const saveIncomeType = (e) => {
     createBudget()
   }
   document.getElementById('hidden-dropdown').style.display = 'block'
-  document.getElementById('hidden-budget').style.display = 'block'
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
   document.getElementById('income').addEventListener('change', populateValue)
+  addExpense()
 }
 
 const createBudget = (index) => {
@@ -61,4 +61,24 @@ const setOption = (budget, option) => {
 
 const incomeTotal = () => {
   return Object.values(budgets).reduce((acc, budget) => {return budget.income + acc}, 0)
+}
+
+const addExpense = () => {
+  document.getElementById('hidden-expenses').style.display = 'block'
+  document.getElementById('new-expense').addEventListener('click', createNewExpenseFields)
+ 
+}
+
+const createNewExpenseFields = () => {
+  const form = document.getElementById('expenses')
+  let name = document.createElement('input', 'expense-name')
+  name.setAttribute('type', 'text')
+  name.setAttribute('name', 'name')
+  name.setAttribute('placeholder', 'Expense Name')
+  form.appendChild(name)
+  let amount = document.createElement('input', 'expense-amount')
+  amount.setAttribute('type', 'text')
+  amount.setAttribute('name', 'amount')
+  amount.setAttribute('placeholder', 'Expense Amount')
+  form.appendChild(amount)
 }

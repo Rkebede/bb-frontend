@@ -33,24 +33,25 @@
           type="number" 
           name="income" 
           value="0" 
-          placeholder="check amount"
+          placeholder="Check amount"
         >
         <button type="submit">Save</button>
       </form>    
       <h2 id="total"></h3>
     </div>
     
-    <form id="hidden-budget" style="display: none;">
-      <h1>Expenses</h1>
-      <input type="number" 
-        name="income" 
-        placeholder="check amount"
-      >
-      <button type="submit">Add Expense</button>
+    <div id="hidden-expenses" style="display: none;">
+      <form id="expenses">
+        <h1>Expenses</h1>
+          <input id="expense-name" type="text" name="name" placeholder="Expense">
+          <input id="expense-amount" type="number" name="amount" placeholder="Expense Amount">
+      </form>
+      <button id="new-expense">Add Expense</button>
     </div>
 
 
   </body>
   <script src="src/budget.js" charset="UTF-8"></script>
+  <script src="src/expense.js" charset="UTF-8"></script>
   <script type="application/javascript" defer src="src/index.js" charset="UTF-8"></script>
 </html>
