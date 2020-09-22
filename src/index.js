@@ -21,8 +21,8 @@ const saveIncomeType = (e) => {
   document.getElementById('hidden-budget').style.display = 'block'
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
   document.getElementById('income').addEventListener('change', populateValue)
-  // document.getElementById('total').innerText = `Total: ${incomeTotal()}`
 }
+
 const createBudget = (index) => {
   const budget =  new Budget(index)
   budgets = {...budgets, [index]: budget}
