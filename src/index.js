@@ -66,19 +66,25 @@ const incomeTotal = () => {
 const addExpense = () => {
   document.getElementById('hidden-expenses').style.display = 'block'
   document.getElementById('new-expense').addEventListener('click', createNewExpenseFields)
- 
+  
 }
 
 const createNewExpenseFields = () => {
   const form = document.getElementById('expenses')
+  let input = document.createElement('fieldset', 'expenses')
+
+  form.appendChild(input)
   let name = document.createElement('input', 'expense-name')
   name.setAttribute('type', 'text')
   name.setAttribute('name', 'name')
   name.setAttribute('placeholder', 'Expense Name')
-  form.appendChild(name)
+  input.appendChild(name)
   let amount = document.createElement('input', 'expense-amount')
   amount.setAttribute('type', 'text')
   amount.setAttribute('name', 'amount')
   amount.setAttribute('placeholder', 'Expense Amount')
-  form.appendChild(amount)
+  input.appendChild(amount)
+  let saveButton = document.createElement('button', 'save')
+  saveButton.innerText = 'Save'
+  input.appendChild(saveButton)
 }
