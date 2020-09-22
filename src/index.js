@@ -20,6 +20,7 @@ const saveIncomeType = (e) =>{
   document.getElementById('hidden-dropdown').style.display = 'block'
   document.getElementById('hidden-budget').style.display = 'block'
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
+  document.getElementById('income').addEventListener('change', populateValue)
 }
 const createBudget = (index) => {
   const budget =  new Budget(index)
@@ -40,5 +41,13 @@ const saveIncomeToBudget = (e) =>{
     const value = e.target.elements[1].value
     const id = e.target.elements[0].value 
     let budget = budgets[id]
-    budget.income = value 
+   return budget.income = value 
 }
+
+const populateValue = (e) =>{
+    e.preventDefault()
+    const id = e.target.value 
+    let budget = budgets[id]
+    document.getElementById('amount').value = budget.income
+}
+
