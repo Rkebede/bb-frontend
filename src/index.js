@@ -1,4 +1,3 @@
-const URL = 'http://localhost:3000'
 let budgets = {}
 let expenses = {}
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,6 +71,11 @@ const addExpense = () => {
   createNewExpenseFields(expense.id)
 }
 
+const currentBudget = () => {
+  const id = document.getElementById('income').value
+  return budgets[id]
+}
+
 const createNewExpenseFields = (id) => {
   const form = document.getElementById('expenses')
   let input = document.createElement('fieldset', 'expenses')
@@ -90,17 +94,16 @@ const createNewExpenseFields = (id) => {
   let saveButton = document.createElement('button', 'save')
   saveButton.innerText = 'Save'
   input.appendChild(saveButton)
-  saveButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    const expense = expenses[e.target.parentElement.id]
-    const name = e.target.parentElement.elements[0].value
-    const amount = e.target.parentElement.elements[1].value
-    expense.name = name 
-    expense.amount = amount
-  })
+  saveButton.addEventListener('click', saveValuesToExpense)
 }
 
-const currentBudget = () => {
-  const id = document.getElementById('income').value
-  return budgets[id]
+const saveValuesToExpense = (e) => {
+  e.preventDefault()
+  const expense = expenses[e.target.parentElement.id]
+  const name = e.target.parentElement.elements[0].value
+  const amount = e.target.parentElement.elements[1].value
+  expense.name = name 
+  expense.amount = amount
+  console.log(expense)
 }
+
