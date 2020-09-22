@@ -104,6 +104,5 @@ const saveValuesToExpense = (e) => {
   const amount = e.target.parentElement.elements[1].value
   expense.name = name 
   expense.amount = amount
-  console.log(expense)
 }
 
