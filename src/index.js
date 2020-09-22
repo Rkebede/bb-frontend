@@ -1,3 +1,4 @@
+// URL = 'http://localhost:3000'
 let budgets = {}
 let expenses = {}
 document.addEventListener('DOMContentLoaded', () => {

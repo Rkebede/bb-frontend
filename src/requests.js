@@ -1,20 +1,23 @@
-const URL = 'http://localhost:3000'
+let URL = 'http://localhost:3000'
 class API {
 
-  getAllBudgets(){
-    return fetch('http://localhost:300/budgets')
+  static getAllBudgets() {
+    return fetch(URL + '/budgets')
     .then(resp => resp.json())
+    .then(resp => json(resp)) 
+    
   }
-  getAllExpenses(){
-    return fetch('http://localhost:300/expenses')
+  static getAllExpenses() {
+    return fetch(URL + '/expenses')
     .then(resp => resp.json())
+    .then(resp => json(resp)) 
   }
 
-  deleteExpense(id){
-    return fetch(`http://localhost:300/expenses/${id}`, {
+  static deleteExpense(URL, id){
+    return fetch(URL + '/expenses/' + id, {
       method: "DELETE"
     })
-    .then(resp => resp.json())
+    .then(resp => resp.json());
   }
 
 }
