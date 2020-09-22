@@ -1,6 +1,6 @@
 const URL = 'http://localhost:3000'
 let budgets = {}
-
+let expenses = {}
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('income-dropdown').addEventListener('submit', saveIncomeType)
 })
@@ -18,9 +18,10 @@ const saveIncomeType = (e) => {
     createBudget()
   }
   document.getElementById('hidden-dropdown').style.display = 'block'
+  document.getElementById('hidden-expenses').style.display = 'block'
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
   document.getElementById('income').addEventListener('change', populateValue)
-  addExpense()
+  document.getElementById('new-expense').addEventListener('click', addExpense)
 }
 
 const createBudget = (index) => {
@@ -42,7 +43,6 @@ const saveIncomeToBudget = (e) => {
     const value = e.target.elements[1].value
     const option = e.target.elements[0].selectedOptions[0]
     let budget = budgets[option.value]
-    console.log(option)
     budget.income = parseInt(value)
     setOption(budget, option)
     document.getElementById('total').innerText = `Total: $${incomeTotal()}`
@@ -64,15 +64,18 @@ const incomeTotal = () => {
 }
 
 const addExpense = () => {
-  document.getElementById('hidden-expenses').style.display = 'block'
-  document.getElementById('new-expense').addEventListener('click', createNewExpenseFields)
-  
+  const expense = new Expense()
+  currentBudget().expenses.push(expense)
+  expense.budget_id = currentBudget().id
+  expense.id = currentBudget().expenses.length
+  expenses = {...expenses, [expense.id]: expense}
+  createNewExpenseFields(expense.id)
 }
 
-const createNewExpenseFields = () => {
+const createNewExpenseFields = (id) => {
   const form = document.getElementById('expenses')
   let input = document.createElement('fieldset', 'expenses')
-
+  input.setAttribute('id', id)
   form.appendChild(input)
   let name = document.createElement('input', 'expense-name')
   name.setAttribute('type', 'text')
@@ -87,4 +90,17 @@ const createNewExpenseFields = () => {
   let saveButton = document.createElement('button', 'save')
   saveButton.innerText = 'Save'
   input.appendChild(saveButton)
+  saveButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    const expense = expenses[e.target.parentElement.id]
+    const name = e.target.parentElement.elements[0].value
+    const amount = e.target.parentElement.elements[1].value
+    expense.name = name 
+    expense.amount = amount
+  })
+}
+
+const currentBudget = () => {
+  const id = document.getElementById('income').value
+  return budgets[id]
 }
