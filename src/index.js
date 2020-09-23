@@ -51,7 +51,7 @@ const resetBudget = () => {
   API.deleteRequest('/budgets')
   budgets = {}
   expenses = {}
-  document.getElementById('total').innerText = `Total: $0`
+  document.getElementById('total').innerText = `Total: $0` 
   populateValue()
 }
 
@@ -92,7 +92,12 @@ const populateValue = () => {
     document.getElementById('amount').value = 0
   } else {
     document.getElementById('amount').value = currentBudget().income
-    
+    console.log(currentBudget().expenses)
+    // expenses = currentBudget().expenses
+    // for(let expense of expenses) {
+    //   document.getElementById('name').value = expense.amount
+    //   document.getElementById('expense-amount').value = expense.amount
+    // }
   }
 }
 
@@ -109,9 +114,9 @@ const currentBudget = () => {
   return budgets[id]
 }
 const createExpense = (expense) => {
-    expenses = {...expenses, [expense.id]: expense}
-    createNewExpenseFields(expense.id)
-    return expense
+  expenses = {...expenses, [expense.id]: expense}
+  createNewExpenseFields(expense)
+  return expense
 }
 
 const addExpense = () => {
@@ -122,20 +127,24 @@ const addExpense = () => {
   })
 }
 
-const createNewExpenseFields = (id) => {
-  const form = document.getElementById('expenses')
+const createNewExpenseFields = (expense) => {
+  const form = document.getElementById('expenses-form')
   let input = document.createElement('fieldset', 'expenses')
-  input.setAttribute('id', id)
+  input.setAttribute('id', expense.id)
   form.appendChild(input)
-  let name = document.createElement('input', 'expense-name')
+  let name = document.createElement('input')
+  name.setAttribute('id', 'name')
   name.setAttribute('type', 'text')
   name.setAttribute('name', 'name')
   name.setAttribute('placeholder', 'Expense Name')
+  name.value = expense.name
   input.appendChild(name)
   let amount = document.createElement('input', 'expense-amount')
+  amount.setAttribute('id', 'amount')
   amount.setAttribute('type', 'text')
   amount.setAttribute('name', 'amount')
   amount.setAttribute('placeholder', 'Expense Amount')
+  amount.value = expense.amount
   input.appendChild(amount)
   let saveButton = document.createElement('button', 'save')
   saveButton.innerText = 'Save'
@@ -153,5 +162,4 @@ const saveValuesToExpense = (e) => {
     expense.name = resp.name
     expense.amount = resp.amount
   })
-
 }
