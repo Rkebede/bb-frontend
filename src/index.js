@@ -36,10 +36,9 @@ const saveIncomeType = (e) => {
   e.preventDefault()
   document.getElementById('income').options.length = 0
   const value = e.target.elements[0].value
-  restBudget()
+  resetBudget()
   for(let i=0; i < value; i++){
     API.postResquest("/budgets",{income: 0}).then(resp => {
-      console.log(resp)
       const budget = resp
       createBudget(budget)
       createBudgetOption(budget)
@@ -48,7 +47,7 @@ const saveIncomeType = (e) => {
   showBudgetForms()
 }
 
-const restBudget = () => {
+const resetBudget = () => {
   API.deleteRequest('/budgets')
   budgets = {}
   document.getElementById('total').innerText = `Total: $0`
@@ -58,6 +57,7 @@ const restBudget = () => {
 const createBudget = (data) => {
   const budget =  new Budget(data.id, data.income)
   budgets = {...budgets, [data.id]: budget}
+  console.log(data)
   budget.expenses = data.expenses.map((expense) => {
     const newExpense = new Expense(expense.id, expense.name, expense.budget_id, expense.amount)
     return createExpense(newExpense)
@@ -82,7 +82,7 @@ const saveIncomeToBudget = (e) => {
     budget.income = resp.income
     setOption(budget, option)
     populateValue()
-    document.getElementById('total').innerText = `Total: $${incomeTotal}`
+    document.getElementById('total').innerText = `Total: $${incomeTotal()}`
   })
 }
 
@@ -112,7 +112,7 @@ const addExpense = () => {
   const body = {budget_id: currentBudget().id, amount: 0, name: ""}
   API.postResquest('/expenses', body).then((resp) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
-    currentBudget().push(createExpense(expense))
+    currentBudget().expenses.push(createExpense(expense))
   })
 }
 
