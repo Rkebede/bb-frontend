@@ -50,6 +50,7 @@ const saveIncomeType = (e) => {
 const resetBudget = () => {
   API.deleteRequest('/budgets')
   budgets = {}
+  expenses = {}
   document.getElementById('total').innerText = `Total: $0`
   populateValue()
 }
@@ -91,6 +92,7 @@ const populateValue = () => {
     document.getElementById('amount').value = 0
   } else {
     document.getElementById('amount').value = currentBudget().income
+    
   }
 }
 
@@ -102,6 +104,10 @@ const incomeTotal = () => {
   return Object.values(budgets).reduce((acc, budget) => {return budget.income + acc}, 0)
 }
 
+const currentBudget = () => {
+  const id = document.getElementById('income').value
+  return budgets[id]
+}
 const createExpense = (expense) => {
     expenses = {...expenses, [expense.id]: expense}
     createNewExpenseFields(expense.id)
@@ -114,11 +120,6 @@ const addExpense = () => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
     currentBudget().expenses.push(createExpense(expense))
   })
-}
-
-const currentBudget = () => {
-  const id = document.getElementById('income').value
-  return budgets[id]
 }
 
 const createNewExpenseFields = (id) => {
@@ -147,7 +148,10 @@ const saveValuesToExpense = (e) => {
   const expense = expenses[e.target.parentElement.id]
   const name = e.target.parentElement.elements[0].value
   const amount = e.target.parentElement.elements[1].value
-  expense.name = name 
-  expense.amount = amount
-}
+  API.patchRequest(`/expenses/${expense.id}`,{name, amount}).then((resp) =>{
+    let expense = expenses[resp.id]
+    expense.name = resp.name
+    expense.amount = resp.amount
+  })
 
+}
