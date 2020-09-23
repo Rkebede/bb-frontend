@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createBudgetOption(budget)
       showBudgetForms()
     })
+    setIncomeType(resp.length)
     populateValue()
     document.getElementById('total').innerText = `Total: $${incomeTotal()}`
   })
