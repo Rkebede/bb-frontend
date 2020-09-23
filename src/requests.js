@@ -29,11 +29,10 @@ class API {
   }
 
 
-  static deleteExpense(URL, id){
-    return fetch(URL + '/expenses/' + id, {
+  static deleteRequest(endPoint){
+    return fetch(URL + endPoint, {
       method: "DELETE"
     })
-    .then(resp => resp.json());
   }
 
 }

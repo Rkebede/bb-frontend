@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showBudgetForms()
     })
     populateValue()
+    document.getElementById('total').innerText = `Total: $${incomeTotal()}`
   })
 })
 
@@ -33,6 +34,7 @@ const saveIncomeType = (e) => {
   e.preventDefault()
   document.getElementById('income').options.length = 0
   const value = e.target.elements[0].value
+  restBudget()
   for(let i=0; i < value; i++){
     API.postResquest("/budgets",{income: 0}).then(resp => {
       console.log(resp)
@@ -42,6 +44,13 @@ const saveIncomeType = (e) => {
     })
   }
   showBudgetForms()
+}
+
+const restBudget = () => {
+  API.deleteRequest('/budgets')
+  budgets = {}
+  document.getElementById('total').innerText = `Total: $0`
+  populateValue()
 }
 
 const createBudget = (data) => {
@@ -72,8 +81,11 @@ const saveIncomeToBudget = (e) => {
 }
 
 const populateValue = () => {
-  // let budget = budgets[id]
-  document.getElementById('amount').value = currentBudget().income
+  if (currentBudget() === undefined) {
+    document.getElementById('amount').value = 0
+  } else {
+    document.getElementById('amount').value = currentBudget().income
+  }
 }
 
 const setOption = (budget, option) => {
