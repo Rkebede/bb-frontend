@@ -31,6 +31,7 @@ const setIncomeType = (budgetCount) => {
     document.getElementById('income-type').value = budgetCount
   }
 }
+
 const saveIncomeType = (e) => {
   e.preventDefault()
   document.getElementById('income').options.length = 0
@@ -94,14 +95,26 @@ const setOption = (budget, option) => {
 }
 
 const incomeTotal = () => {
+  //use budget class?
   return Object.values(budgets).reduce((acc, budget) => {return budget.income + acc}, 0)
 }
 
+// const createExpense = (data) => {
+//   const expense =  new Expense(data.id, data.name, data.budget_id, data.amount)
+//   expenses = {...expenses, [data.id]: expense}
+//   console.log(expense)
+//   return budget
+// }
+
 const addExpense = () => {
+  const body = {budget_id: currentBudget().id, amount: 0, name: ""}
+  API.postResquest('/expenses', body).then((resp) => {
+    
+  })
   const expense = new Expense()
   currentBudget().expenses.push(expense)
   expense.budget_id = currentBudget().id
-  expense.id = currentBudget().expenses.length
+  // expense.id = currentBudget().expenses.length
   expenses = {...expenses, [expense.id]: expense}
   createNewExpenseFields(expense.id)
 }

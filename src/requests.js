@@ -28,7 +28,6 @@ class API {
     .then(resp => resp.json())
   }
 
-
   static deleteRequest(endPoint){
     return fetch(URL + endPoint, {
       method: "DELETE"
