@@ -82,7 +82,7 @@ const saveIncomeToBudget = (e) => {
     budget.income = resp.income
     setOption(budget, option)
     populateValue()
-    document.getElementById('total').innerText = `Total: $${incomeTotal()}`
+    document.getElementById('total').innerText = `Total: $${incomeTotal}`
   })
 }
 
@@ -99,7 +99,6 @@ const setOption = (budget, option) => {
 }
 
 const incomeTotal = () => {
-  //use budget class?
   return Object.values(budgets).reduce((acc, budget) => {return budget.income + acc}, 0)
 }
 

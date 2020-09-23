@@ -6,8 +6,7 @@ class Budget {
   };
 
   totalExpenses(){
-    let expensesAmount = this.expenses.values
-    expensesAmount.reduce((acc, expense) => {
+    this.expenses.reduce((acc, expense) => {
       return acc + expense
     }, 0)
   }
