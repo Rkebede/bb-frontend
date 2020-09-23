@@ -1,35 +1,52 @@
-// URL = 'http://localhost:3000'
 let budgets = {}
 let expenses = {}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('income-dropdown').addEventListener('submit', saveIncomeType)
+  API.getRequest("/budgets").then(resp => {
+    resp.forEach((budget) => {
+      createBudget(budget)
+      createBudgetOption(budget)
+      showBudgetForms()
+    })
+    populateValue()
+  })
 })
 
+const showBudgetForms = () => {
+  document.getElementById('hidden-dropdown').style.display = 'block'
+  document.getElementById('hidden-expenses').style.display = 'block'
+  document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
+  document.getElementById('income').addEventListener('change', (e) => {
+    e.preventDefault()
+    populateValue()
+  })
+  document.getElementById('new-expense').addEventListener('click', addExpense)
+}
+
+const setIncomeType = (budgetCount) => {
+  if (budgetCount > 0 ){
+    document.getElementById('income-type').value = budgetCount
+  }
+}
 const saveIncomeType = (e) => {
   e.preventDefault()
   document.getElementById('income').options.length = 0
   const value = e.target.elements[0].value
-  if (value !== 1 ){
-    for(let i=0; i < value; i++){
-      API.postResquest("/budgets",{income: 0}).then(resp => {
-        console.log(resp)
-        const budget = json(resp)
-        createBudget(budget)
-        createBudgetOption(budget)
-      })
-    } 
+  for(let i=0; i < value; i++){
+    API.postResquest("/budgets",{income: 0}).then(resp => {
+      console.log(resp)
+      const budget = resp
+      createBudget(budget)
+      createBudgetOption(budget)
+    })
   }
-  document.getElementById('hidden-dropdown').style.display = 'block'
-  document.getElementById('hidden-expenses').style.display = 'block'
-  document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
-  document.getElementById('income').addEventListener('change', populateValue)
-  document.getElementById('new-expense').addEventListener('click', addExpense)
+  showBudgetForms()
 }
 
 const createBudget = (data) => {
   const budget =  new Budget(data.id, data.income)
-  console.log(budget)
-  budgets = {...budgets, [index]: budget}
+  budgets = {...budgets, [data.id]: budget}
   return budget
 }
 
@@ -42,24 +59,25 @@ const createBudgetOption = (budget) => {
 }
 
 const saveIncomeToBudget = (e) => {
-    e.preventDefault()
-    const value = e.target.elements[1].value
-    const option = e.target.elements[0].selectedOptions[0]
-    let budget = budgets[option.value]
-    budget.income = parseInt(value)
+  e.preventDefault()
+  const value = e.target.elements[1].value
+  const option = e.target.elements[0].selectedOptions[0]
+  API.patchRequest(`/budgets/${option.value}`,{income: value}).then((resp) =>{
+    let budget = budgets[resp.id]
+    budget.income = resp.income
     setOption(budget, option)
+    populateValue()
     document.getElementById('total').innerText = `Total: $${incomeTotal()}`
+  })
 }
 
-const populateValue = (e) => {
-    e.preventDefault()
-    const id = e.target.value 
-    let budget = budgets[id]
-    document.getElementById('amount').value = budget.income
+const populateValue = () => {
+  // let budget = budgets[id]
+  document.getElementById('amount').value = currentBudget().income
 }
 
 const setOption = (budget, option) => {
-  option.innerText = `Paycheck ${budget.id} : $${budget.income}`
+  option.innerText = `Paycheck : $${budget.income}`
 }
 
 const incomeTotal = () => {

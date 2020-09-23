@@ -12,17 +12,22 @@ class API {
     .then(resp => resp.json())
   }
 
-  static getAllBudgets() {
-    return fetch(URL + '/budgets')
-    .then(resp => resp.json())
-    .then(resp => json(resp)) 
-    
+  static getRequest(endPoint) {
+    return fetch(URL + endPoint)
+    .then(resp => resp.json())    
   }
-  static getAllExpenses() {
-    return fetch(URL + '/expenses')
+  
+  static patchRequest(endPoint, body){
+    return fetch((URL + endPoint), {
+      method: 'PATCH',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
     .then(resp => resp.json())
-    .then(resp => json(resp)) 
   }
+
 
   static deleteExpense(URL, id){
     return fetch(URL + '/expenses/' + id, {
