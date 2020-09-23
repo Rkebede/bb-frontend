@@ -58,6 +58,10 @@ const restBudget = () => {
 const createBudget = (data) => {
   const budget =  new Budget(data.id, data.income)
   budgets = {...budgets, [data.id]: budget}
+  budget.expenses = data.expenses.map((expense) => {
+    const newExpense = new Expense(expense.id, expense.name, expense.budget_id, expense.amount)
+    return createExpense(newExpense)
+  })
   return budget
 }
 
@@ -99,24 +103,18 @@ const incomeTotal = () => {
   return Object.values(budgets).reduce((acc, budget) => {return budget.income + acc}, 0)
 }
 
-// const createExpense = (data) => {
-//   const expense =  new Expense(data.id, data.name, data.budget_id, data.amount)
-//   expenses = {...expenses, [data.id]: expense}
-//   console.log(expense)
-//   return budget
-// }
+const createExpense = (expense) => {
+    expenses = {...expenses, [expense.id]: expense}
+    createNewExpenseFields(expense.id)
+    return expense
+}
 
 const addExpense = () => {
   const body = {budget_id: currentBudget().id, amount: 0, name: ""}
   API.postResquest('/expenses', body).then((resp) => {
-    
+    const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
+    currentBudget().push(createExpense(expense))
   })
-  const expense = new Expense()
-  currentBudget().expenses.push(expense)
-  expense.budget_id = currentBudget().id
-  // expense.id = currentBudget().expenses.length
-  expenses = {...expenses, [expense.id]: expense}
-  createNewExpenseFields(expense.id)
 }
 
 const currentBudget = () => {
