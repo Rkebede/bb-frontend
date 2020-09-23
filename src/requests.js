@@ -1,6 +1,17 @@
 let URL = 'http://localhost:3000'
 class API {
 
+  static postResquest(endPoint, body) {
+    return fetch((URL + endPoint), {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    .then(resp => resp.json())
+  }
+
   static getAllBudgets() {
     return fetch(URL + '/budgets')
     .then(resp => resp.json())

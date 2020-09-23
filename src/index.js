@@ -11,11 +11,13 @@ const saveIncomeType = (e) => {
   const value = e.target.elements[0].value
   if (value !== 1 ){
     for(let i=0; i < value; i++){
-      const budget = createBudget(i+1)
-      createBudgetOption(budget)
+      API.postResquest("/budgets",{income: 0}).then(resp => {
+        console.log(resp)
+        const budget = json(resp)
+        createBudget(budget)
+        createBudgetOption(budget)
+      })
     } 
-  } else {
-    createBudget()
   }
   document.getElementById('hidden-dropdown').style.display = 'block'
   document.getElementById('hidden-expenses').style.display = 'block'
@@ -24,8 +26,9 @@ const saveIncomeType = (e) => {
   document.getElementById('new-expense').addEventListener('click', addExpense)
 }
 
-const createBudget = (index) => {
-  const budget =  new Budget(index)
+const createBudget = (data) => {
+  const budget =  new Budget(data.id, data.income)
+  console.log(budget)
   budgets = {...budgets, [index]: budget}
   return budget
 }
