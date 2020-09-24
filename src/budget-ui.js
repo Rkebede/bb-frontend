@@ -51,15 +51,6 @@ const saveIncomeToBudget = (e) => {
   })
 }
 
-// const populateValue = () => {
-//   if (currentBudget() === undefined) {
-//     document.getElementById('amount').value = 0
-    
-//   } else {
-//     document.getElementById('amount').value = currentBudget().income
-//   }
-// }
-
 const setOption = (budget, option) => {
   option.innerText = `Paycheck : $${budget.income}`
 }

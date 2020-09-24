@@ -1,6 +1,5 @@
 const createExpense = (expense) => {
   expenses = {...expenses, [expense.id]: expense}
-  // createNewExpenseFields(expense)
   return expense
 }
 
@@ -39,9 +38,15 @@ const createNewExpenseFields = (expense) => {
   amount.value = expense.amount
   input.appendChild(amount)
   let saveButton = document.createElement('button', 'save')
+  saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
   saveButton.innerText = 'Save'
   input.appendChild(saveButton)
   saveButton.addEventListener('click', saveValuesToExpense)
+  let deleteButton = document.createElement('button', 'delete')
+  deleteButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
+  deleteButton.innerText = 'Delete'
+  input.appendChild(deleteButton)
+  deleteButton.addEventListener('click', deleteExpense)
   
 }
 
@@ -55,6 +60,13 @@ const saveValuesToExpense = (e) => {
     expense.name = resp.name
     expense.amount = resp.amount
   })
+}
+
+const deleteExpense = (e) => {
+  e.preventDefault()
+  const expenseId = e.target.parentElement.id 
+  API.deleteRequest(`/expenses/${expenseId}`)
+  document.getElementById(expenseId).remove()
 }
 
 const resetExpense = () => {

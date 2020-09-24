@@ -2,48 +2,39 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
-    <!-- <script src="semantic/dist/semantic.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
     <title></title>
   </head>
   <body>
-    <header class="header">
-      <h1>Welcome to Budget Buddy</h1>
+    <header class="uk-heading-line uk-text-center">
+      <h1 class="uk-padding" class="uk-text-bold">Welcome to Budget Buddy</h1>
     </header>
     
-    <div id="dropdown-selector">
+    <div class="uk-padding" id="dropdown-selector" style="display: block;">
       <h1>Income Type</h1>
-
       <form id="income-dropdown">
         <select name="income-type" id="income-type">
           <option value="4">Weekly</option>
           <option value="2">Semi-Monthly</option>
           <option value="1">Monthly</option>
         </select>
-
-        <button class="ui button" type="submit">Save</button>
+        <button class="uk-button uk-button-default uk-button-small" type="submit">Save</button>
       </form>
-
     </div>
 
-    <div id="hidden-dropdown" style="display: none;">
-      <h1>Paycheck</h1>
-      <form id="income-amount">
+    <div class="uk-padding" id="hidden-dropdown" style="display: none;">
+      <h1 style="display: inline;"> Paycheck </h1>
+      <h3 style="display: inline;" id="total"></h3>
+    
+      <form class="uk-margin-top" id="income-amount">
         <select name="income" id="income"></select>
         <input id="amount" type="number" name="income" value="0" placeholder="Check amount">
-        <button type="submit">Save</button>
+        <button class="uk-button uk-button-default uk-button-small" type="submit">Save</button>
       </form>    
-      <h2 id="total"></h3>
     </div>
     
-    <div id="hidden-expenses" style="display: none;">
-       <span>
-         <h1>Expenses <button id="new-expense">Add Expense</button></h1>
-       </span>
+    <div class="uk-padding-large"  id="hidden-expenses" style="display: none;">
+      <h1 style="display: inline;"> Expenses <button class="uk-button uk-button-default uk-button-small" id="new-expense">Add Expense</button></h1>
       <form id="expenses-form">
       </form>
       
@@ -51,11 +42,8 @@
 
 
   </body>
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-  <script src="semantic/dist/semantic.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
   <script src="src/budget-ui.js" charset="UTF-8"></script>
   <script src="src/expense-ui.js" charset="UTF-8"></script>
   <script src="src/requests.js" charset="UTF-8"></script>
