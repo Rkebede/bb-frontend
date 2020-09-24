@@ -1,3 +1,4 @@
+
 class Budget {
   constructor(id, income = 0) {
     this.income = income;
