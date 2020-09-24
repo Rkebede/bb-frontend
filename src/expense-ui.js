@@ -71,6 +71,10 @@ const deleteExpense = (e) => {
 
 const resetExpense = () => {
   expenses = {}
+  removeExpenseForm()
+}
+
+const removeExpenseForm = () => {
   let form = document.getElementById('expenses-form')
   if (form){ document.getElementById('expenses-form').remove()
   }

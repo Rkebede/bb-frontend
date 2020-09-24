@@ -22,7 +22,7 @@ const showForms = () => {
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
   document.getElementById('income').addEventListener('change', (e) => {
     e.preventDefault()
-    document.getElementById('expenses-form').remove()
+    removeExpenseForm()
     populateValue(e)
   })
   document.getElementById('new-expense').addEventListener('click', addExpense)

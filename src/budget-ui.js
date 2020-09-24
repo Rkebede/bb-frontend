@@ -46,7 +46,6 @@ const saveIncomeToBudget = (e) => {
     let budget = budgets[resp.id]
     budget.income = resp.income
     setOption(budget, option)
-    populateValue()
     document.getElementById('total').innerText = `Total: $${incomeTotal()}`
   })
 }
