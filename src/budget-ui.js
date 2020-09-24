@@ -23,10 +23,11 @@ const saveIncomeType = (e) => {
 const createBudget = (data) => {
   const budget =  new Budget(data.id, data.income)
   budgets = {...budgets, [data.id]: budget}
-  budget.expenses = data.expenses.map((expense) => {
+  data.expenses.map((expense) => {
     const newExpense = new Expense(expense.id, expense.name, expense.budget_id, expense.amount)
+    budget.expenses = {...budget.expenses, [newExpense.id]: newExpense}
     return createExpense(newExpense)
-  })
+  })  
   return budget
 }
 

@@ -7,7 +7,7 @@ const addExpense = () => {
   const body = {budget_id: currentBudget().id, amount: 0, name: ""}
   API.postResquest('/expenses', body).then((resp) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
-    currentBudget().expenses.push(createExpense(expense))
+    currentBudget().expenses = {...currentBudget().expenses, [expense.id]: createExpense(expense)}
     createNewExpenseFields(expense)
   })
 }
@@ -52,6 +52,7 @@ const createNewExpenseFields = (expense) => {
 
 const saveValuesToExpense = (e) => {
   e.preventDefault()
+  debugger  
   const expense = expenses[e.target.parentElement.id]
   const name = e.target.parentElement.elements[0].value
   const amount = e.target.parentElement.elements[1].value
@@ -67,6 +68,8 @@ const deleteExpense = (e) => {
   const expenseId = e.target.parentElement.id 
   API.deleteRequest(`/expenses/${expenseId}`)
   document.getElementById(expenseId).remove()
+  delete expenses[expenseId]
+  delete currentBudget().expenses[expenseId]
 }
 
 const resetExpense = () => {

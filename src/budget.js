@@ -2,7 +2,7 @@ class Budget {
   constructor (id, income = 0){
     this.income = income; 
     this.id = id 
-    this.expenses = []
+    this.expenses = {}
   };
 
   totalExpenses(){
@@ -14,6 +14,11 @@ class Budget {
   expensesMinusIncome(){
    return this.income - this.totalExpenses 
   }
+
+  expenseValues(){
+    return Object.values(this.expenses)
+  }
 }
+
 
 
