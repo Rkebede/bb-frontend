@@ -2,6 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <!-- <script src="semantic/dist/semantic.min.js"></script> -->
     <title></title>
   </head>
   <body>
@@ -19,7 +25,7 @@
           <option value="1">Monthly</option>
         </select>
 
-        <button type="submit">Save</button>
+        <button class="ui button" type="submit">Save</button>
       </form>
 
     </div>
@@ -35,14 +41,21 @@
     </div>
     
     <div id="hidden-expenses" style="display: none;">
+       <span>
+         <h1>Expenses <button id="new-expense">Add Expense</button></h1>
+       </span>
       <form id="expenses-form">
-        <h1>Expenses</h1>
       </form>
-      <button id="new-expense">Add Expense</button>
+      
     </div>
 
 
   </body>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="semantic/dist/semantic.min.js"></script>
   <script src="src/budget-ui.js" charset="UTF-8"></script>
   <script src="src/expense-ui.js" charset="UTF-8"></script>
   <script src="src/requests.js" charset="UTF-8"></script>

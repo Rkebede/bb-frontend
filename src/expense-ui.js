@@ -1,6 +1,6 @@
 const createExpense = (expense) => {
   expenses = {...expenses, [expense.id]: expense}
-  createNewExpenseFields(expense)
+  // createNewExpenseFields(expense)
   return expense
 }
 
@@ -9,23 +9,30 @@ const addExpense = () => {
   API.postResquest('/expenses', body).then((resp) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
     currentBudget().expenses.push(createExpense(expense))
+    createNewExpenseFields(expense)
   })
 }
 
 const createNewExpenseFields = (expense) => {
-  const form = document.getElementById('expenses-form')
-  let input = document.createElement('fieldset', 'expenses')
+  let form = document.getElementById('expenses-form')
+  if (!form) {
+    form = document.createElement('form')
+    form.setAttribute('id', 'expenses-form')
+    document.getElementById('hidden-expenses').appendChild(form)
+  }
+
+  let input = document.createElement('fieldset')
   input.setAttribute('id', expense.id)
   form.appendChild(input)
   let name = document.createElement('input')
-  name.setAttribute('id', 'name')
+  name.setAttribute('id', 'expense-name')
   name.setAttribute('type', 'text')
   name.setAttribute('name', 'name')
   name.setAttribute('placeholder', 'Expense Name')
   name.value = expense.name
   input.appendChild(name)
-  let amount = document.createElement('input', 'expense-amount')
-  amount.setAttribute('id', 'amount')
+  let amount = document.createElement('input')
+  amount.setAttribute('id', 'expense-amount')
   amount.setAttribute('type', 'text')
   amount.setAttribute('name', 'amount')
   amount.setAttribute('placeholder', 'Expense Amount')
@@ -35,6 +42,7 @@ const createNewExpenseFields = (expense) => {
   saveButton.innerText = 'Save'
   input.appendChild(saveButton)
   saveButton.addEventListener('click', saveValuesToExpense)
+  
 }
 
 const saveValuesToExpense = (e) => {
@@ -51,5 +59,7 @@ const saveValuesToExpense = (e) => {
 
 const resetExpense = () => {
   expenses = {}
-  document.getElementById('expenses-form').reset()
+  let form = document.getElementById('expenses-form')
+  if (form){ document.getElementById('expenses-form').remove()
+  }
 }

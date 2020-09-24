@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     resp.forEach((budget) => {
       createBudget(budget)
       createBudgetOption(budget)
-      showForms()
-    })
+    })      
+    currentBudget().expenses.forEach((expense) => createNewExpenseFields(expense))
+    showForms()
     setIncomeType(resp.length)
     populateValue()
     document.getElementById('total').innerText = `Total: $${incomeTotal()}`
@@ -21,9 +22,21 @@ const showForms = () => {
   document.getElementById('income-amount').addEventListener('submit', saveIncomeToBudget)
   document.getElementById('income').addEventListener('change', (e) => {
     e.preventDefault()
-    populateValue()
+    document.getElementById('expenses-form').remove()
+    populateValue(e)
   })
   document.getElementById('new-expense').addEventListener('click', addExpense)
+}
+
+const populateValue = (e) => {
+  if (currentBudget() === undefined) {
+    document.getElementById('amount').value = 0
+  } else {
+    document.getElementById('amount').value = currentBudget().income
+    currentBudget().expenses.forEach((expense) => {
+      createNewExpenseFields(expense)
+    })
+  }
 }
 
 // const setIncomeType = (budgetCount) => {

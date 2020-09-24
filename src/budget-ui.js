@@ -20,13 +20,6 @@ const saveIncomeType = (e) => {
   showForms()
 }
 
-const resetBudget = () => {
-  API.deleteRequest('/budgets')
-  budgets = {}
-  document.getElementById('total').innerText = `Total: $0` 
-  populateValue()
-}
-
 const createBudget = (data) => {
   const budget =  new Budget(data.id, data.income)
   budgets = {...budgets, [data.id]: budget}
@@ -58,14 +51,14 @@ const saveIncomeToBudget = (e) => {
   })
 }
 
-const populateValue = () => {
-  if (currentBudget() === undefined) {
-    document.getElementById('amount').value = 0
+// const populateValue = () => {
+//   if (currentBudget() === undefined) {
+//     document.getElementById('amount').value = 0
     
-  } else {
-    document.getElementById('amount').value = currentBudget().income
-  }
-}
+//   } else {
+//     document.getElementById('amount').value = currentBudget().income
+//   }
+// }
 
 const setOption = (budget, option) => {
   option.innerText = `Paycheck : $${budget.income}`
@@ -78,4 +71,11 @@ const incomeTotal = () => {
 const currentBudget = () => {
   const id = document.getElementById('income').value
   return budgets[id]
+}
+
+const resetBudget = () => {
+  API.deleteRequest('/budgets')
+  budgets = {}
+  document.getElementById('total').innerText = `Total: $0` 
+  populateValue()
 }
