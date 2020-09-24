@@ -14,7 +14,6 @@ class Budget {
   expensesMinusIncome(){
    return this.income - this.totalExpenses 
   }
-
 }
 
 
