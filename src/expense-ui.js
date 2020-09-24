@@ -1,13 +1,13 @@
 const createExpense = (expense) => {
-  expenses = {...expenses, [expense.id]: expense}
+  expenses = { ...expenses, [expense.id]: expense }
   return expense
 }
 
 const addExpense = () => {
-  const body = {budget_id: currentBudget().id, amount: 0, name: ""}
+  const body = { budget_id: currentBudget().id, amount: 0, name: "" }
   API.postResquest('/expenses', body).then((resp) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
-    currentBudget().expenses = {...currentBudget().expenses, [expense.id]: createExpense(expense)}
+    currentBudget().expenses = { ...currentBudget().expenses, [expense.id]: createExpense(expense) }
     createNewExpenseFields(expense)
   })
 }
@@ -47,16 +47,16 @@ const createNewExpenseFields = (expense) => {
   deleteButton.innerText = 'Delete'
   input.appendChild(deleteButton)
   deleteButton.addEventListener('click', deleteExpense)
-  
+
 }
 
 const saveValuesToExpense = (e) => {
   e.preventDefault()
-  debugger  
+  debugger
   const expense = expenses[e.target.parentElement.id]
   const name = e.target.parentElement.elements[0].value
   const amount = e.target.parentElement.elements[1].value
-  API.patchRequest(`/expenses/${expense.id}`,{name, amount}).then((resp) =>{
+  API.patchRequest(`/expenses/${expense.id}`, { name, amount }).then((resp) => {
     let expense = expenses[resp.id]
     expense.name = resp.name
     expense.amount = resp.amount
@@ -65,7 +65,7 @@ const saveValuesToExpense = (e) => {
 
 const deleteExpense = (e) => {
   e.preventDefault()
-  const expenseId = e.target.parentElement.id 
+  const expenseId = e.target.parentElement.id
   API.deleteRequest(`/expenses/${expenseId}`)
   document.getElementById(expenseId).remove()
   delete expenses[expenseId]
@@ -79,6 +79,7 @@ const resetExpense = () => {
 
 const removeExpenseForm = () => {
   let form = document.getElementById('expenses-form')
-  if (form){ document.getElementById('expenses-form').remove()
+  if (form) {
+    document.getElementById('expenses-form').remove()
   }
 }
