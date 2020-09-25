@@ -33,5 +33,4 @@ class API {
       method: "DELETE"
     })
   }
-
 }

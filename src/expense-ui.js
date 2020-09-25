@@ -6,7 +6,6 @@ const addExpense = (e) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
     budget.expenses = { ...budget.expenses, [expense.id]: expense }
   })
-
 }
 
 const expenseForm = (budget) => {
@@ -59,12 +58,10 @@ const createNewExpenseFields = (expense) => {
   deleteButton.innerText = 'Delete'
   input.appendChild(deleteButton)
   deleteButton.addEventListener('click', deleteExpense)
-
 }
 
 const saveValuesToExpense = (e) => {
   e.preventDefault()
-
   const expense = Expense.all[e.target.parentElement.id]
   const name = e.target.parentElement.elements[0].value
   const amount = e.target.parentElement.elements[1].value
