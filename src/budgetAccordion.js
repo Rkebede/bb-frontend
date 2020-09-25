@@ -5,7 +5,6 @@ class BudgetAccordion {
   }
 
   renderBudgetAccordion() {
-    // let accordion = document.getElementById('uk-accordion')
     let budgetAccordion = document.createElement('li')
     accordionContainer.appendChild(budgetAccordion)
     let accordionContent = document.createElement('div')

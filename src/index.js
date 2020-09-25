@@ -3,8 +3,6 @@ let accordionContainer = document.getElementById('uk-accordion')
 document.addEventListener('DOMContentLoaded', () => {
   IncomeTypeForm.setEventListeners()
   Budget.getBudgets()
-
-
 })
 
 const showForms = () => {

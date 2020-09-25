@@ -12,7 +12,7 @@ const saveIncomeType = (e) => {
   for (let i = 0; i < value; i++) {
     API.postResquest("/budgets", { income: 0 }).then(resp => {
       new Budget(resp.id, resp.income, resp.expenses)
-      
+
       showForms()
     })
   }
@@ -51,7 +51,9 @@ const resetBudget = () => {
 }
 
 const parentBudget = (e) => {
+  
   let id = e.target.parentElement.previousElementSibling.id
+  
   let budget = Budget.findById(id)
   return budget
 }

@@ -11,7 +11,7 @@ class Budget {
   };
 
   static findById(id) {
-    return this.constructor.all[id]
+    return this.all[id]
   }
 
   static getBudgets() {
@@ -27,8 +27,8 @@ class Budget {
 
   static createBudgets(budgetObjs){
     budgetObjs.forEach((budgetObj) => {
-      const expenses = Expense.createExpensesForBudget(budgetObj)
-      new Budget(budgetObj.id, budgetObj.income, expenses)
+      const budget = new Budget(budgetObj.id, budgetObj.income)
+       budget.expenses = Expense.createExpensesForBudget(budgetObj)
     })
   }
 

@@ -4,10 +4,7 @@ const addExpense = (e) => {
   const body = { budget_id: budget.id, amount: 0, name: "" }
   API.postResquest('/expenses', body).then((resp) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
-    budget.expenses = { ...budget.expenses, [expense.id]: createExpense(expense) }
-
-    createNewExpenseFields(expense)
-
+    budget.expenses = { ...budget.expenses, [expense.id]: expense }
   })
 
 }
