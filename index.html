@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" style="height: 100%;">
 
 <head>
   <meta charset="utf-8">
@@ -7,10 +7,11 @@
   <title></title>
 </head>
 
-<body>
+<body class="uk-background-muted" style="height: 100%;">
   <header class="uk-heading-line uk-text-center">
     <h1 class="uk-padding" class="uk-text-bold">Welcome to Budget Buddy</h1>
   </header>
+
 
   <ul class="uk-subnav uk-subnav-pill uk-padding" uk-switcher="connect: .switcher-container">
     <li><a href="#">Income Type </a></li>
@@ -34,19 +35,13 @@
       <div id="paycheck-tab" style="display: none;">
         <div class="uk-padding" id="hidden-dropdown">
           <h1 style="display: inline;"> Paycheck </h1>
-          <h3 style="display: inline;" id="total"></h3>
-          <form class="uk-margin-top" id="income-amount">
-            <select name="income" id="income"></select>
-            <input id="amount" type="number" name="income" value="0" placeholder="Check amount">
-            <button class="uk-button uk-button-default uk-button-small" type="submit">Save</button>
-          </form>
-        </div>
+          <h2 style="display: inline;" id="total"></h2>
 
-        <div class="uk-padding" id="hidden-expenses">
-          <h1 style="display: inline;"> Expenses <button class="uk-button uk-button-default uk-button-small"
-              id="new-expense">Add Expense</button></h1>
-          <form class="uk-margin-top" id="expenses-form">
-          </form>
+          <ul uk-accordion id="uk-accordion">
+
+          </ul>
+
+
         </div>
       </div>
     </li>
