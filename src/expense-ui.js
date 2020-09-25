@@ -1,7 +1,3 @@
-const createExpense = (expense) => {
-  expenses = { ...expenses, [expense.id]: expense }
-  return expense
-}
 
 const addExpense = (e) => {
   let budget = parentBudget(e)
@@ -72,11 +68,11 @@ const createNewExpenseFields = (expense) => {
 const saveValuesToExpense = (e) => {
   e.preventDefault()
 
-  const expense = expenses[e.target.parentElement.id]
+  const expense = Expense.all[e.target.parentElement.id]
   const name = e.target.parentElement.elements[0].value
   const amount = e.target.parentElement.elements[1].value
   API.patchRequest(`/expenses/${expense.id}`, { name, amount }).then((resp) => {
-    let expense = expenses[resp.id]
+    let expense = Expense.all[resp.id]
     expense.name = resp.name
     expense.amount = resp.amount
   })
@@ -87,11 +83,11 @@ const deleteExpense = (e) => {
   const expenseId = e.target.parentElement.id
   API.deleteRequest(`/expenses/${expenseId}`)
   document.getElementById(expenseId).remove()
-  delete expenses[expenseId]
+  delete Expense.all[expenseId]
 }
 
 const resetExpense = () => {
-  expenses = {}
+  Expense.all = {}
   removeExpenseForm()
 }
 
