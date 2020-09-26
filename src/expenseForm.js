@@ -38,7 +38,7 @@ class ExpenseForm {
     name.setAttribute('name', 'name')
     name.setAttribute('placeholder', 'Expense Name')
     name.value = this.name
-    name.addEventListener('change', (e)=>{this.name = e.target.value})
+    name.addEventListener('change', (e) => { this.name = e.target.value })
     return name
   }
 
@@ -49,34 +49,31 @@ class ExpenseForm {
     amount.setAttribute('name', 'amount')
     amount.setAttribute('placeholder', 'Expense Amount')
     amount.value = this.amount
-    amount.addEventListener('change', (e)=>{this.amount = e.target.value})
+    amount.addEventListener('change', (e) => { this.amount = e.target.value })
     return amount
   }
 
   saveExpenseButton() {
-    let saveButton = document.createElement('button', 'save')
-    saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
-    saveButton.innerText = 'Save'
-    saveButton.addEventListener('click', (e) => {
+    let eventFn = (e) => {
       e.preventDefault()
-      this.expense.update({ name: this.name, amount: this.amount })
-
-    })
+      this.expense.update({
+        name: this.name, amount: this.amount
+      })
+    }
+    let saveButton = createButton('save-expense-button', 'Save', eventFn)
     return saveButton
   }
-
+  
   deleteExpenseButton() {
-    let deleteButton = document.createElement('button', 'delete')
-    deleteButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
-    deleteButton.innerText = 'Delete'
-    deleteButton.addEventListener('click', (e) => {
+    let eventFn = (e) => {
       e.preventDefault()
       this.expense.delete()
-    })
+    }
+    let deleteButton = createButton('expense-delete-button', 'Delete', eventFn)
     return deleteButton
   }
 
-  remove(){
+  remove() {
     document.getElementById(this.expense.id).remove()
   }
 

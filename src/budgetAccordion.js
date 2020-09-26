@@ -3,7 +3,6 @@ class BudgetAccordion {
     this.budget = budget
     this.income = budget.income
     this.renderBudgetAccordion()
-    
   }
 
   renderBudgetAccordion() {
@@ -50,17 +49,13 @@ class BudgetAccordion {
     return input 
   }
 
-  createAccordionSaveButton() {
-    let saveButton = document.createElement('button')
-    saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
-    saveButton.setAttribute('id', 'save-amount')
-    saveButton.innerText = 'Save'
-    saveButton.addEventListener('click', (e) => {
+  createAccordionSaveButton(){
+    let eventFn = (e) => {
       e.preventDefault()
       this.budget.setIncome(this.income)
-    })
-      
-    return saveButton
+    }
+    let button = createButton('save-amount', 'Save', eventFn)
+    return button
   }
 
   setPaycheckAmount() {
@@ -76,15 +71,22 @@ class BudgetAccordion {
     let expenseHeader = document.createElement('h1')
     expenseHeader.innerText = 'Expense'
     accordion.appendChild(expenseHeader)
-    let button = document.createElement('button')
-    button.setAttribute('id', 'new-expense')
-    button.setAttribute('class', 'uk-button uk-button-default uk-button-small')
-    button.innerText = 'Add Expense'
-    button.addEventListener('click', (e) => this.budget.addExpense())
+    let eventFn = (e) => this.budget.addExpense()
+    let button = createButton('new-expense', 'Add Expense', eventFn)
     accordion.appendChild(button)
     let form = document.createElement('form')
     form.setAttribute('id', 'expenses-form')
     accordion.appendChild(form)
   }
 
+  // createButton(id, text, eventFn){
+  //   let button = document.createElement('button')
+  //   button.setAttribute('class', 'uk-button uk-button-default uk-button-small')
+  //   button.setAttribute('id', id)
+  //   button.innerText = text
+  //   button.addEventListener('click', eventFn)
+  //   return button
+  // }
+
+  
 }
