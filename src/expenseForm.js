@@ -19,6 +19,16 @@ class ExpenseForm {
     input.appendChild(saveButton)
     let deleteButton = this.deleteExpenseButton()
     input.appendChild(deleteButton)
+    this.renderExpenseAccordion()
+  }
+
+  renderExpensesAccordion(){
+    let expenseAccordion = document.createElement('li')
+    accordionContainer.appendChild(expenseAccordion)
+    const accordionContent = Accordion.createAccordionContent()
+    expenseAccordion.appendChild(accordionContent)
+    const title = Accordion.createAccordionTitle('all-expenses', 'All Expenses')
+    expenseAccordion.appendChild(title)  
   }
 
   findOrCreateForm() {
@@ -63,7 +73,7 @@ class ExpenseForm {
     let saveButton = createButton('save-expense-button', 'Save', eventFn)
     return saveButton
   }
-  
+
   deleteExpenseButton() {
     let eventFn = (e) => {
       e.preventDefault()

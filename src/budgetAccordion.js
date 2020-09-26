@@ -8,12 +8,13 @@ class BudgetAccordion {
   renderBudgetAccordion() {
     let budgetAccordion = document.createElement('li')
     accordionContainer.appendChild(budgetAccordion)
-    const accordionContent = this.createAccordionContent()
-    const title = this.createAccordionTitle()
+    const accordionContent = Accordion.createAccordionContent()
+    const title = Accordion.createAccordionTitle(this.budget.id, `Paycheck: $${this.income}`)
     budgetAccordion.appendChild(title)
     let incomeform = document.createElement('form')
     incomeform.setAttribute('id', 'income-form')
-    const input = this.createAccordionInput()
+    const input = Accordion.createAccordionInput(this.income)
+    input.addEventListener('change', (e) => {this.income = e.target.value})
     incomeform.appendChild(input)
     const saveButton = this.createAccordionSaveButton()
     incomeform.appendChild(saveButton)
@@ -22,32 +23,32 @@ class BudgetAccordion {
     this.renderExpenseFormContainer()
   }
 
-  createAccordionContent() {
-    let accordionContent = document.createElement('div')
-    accordionContent.setAttribute('class', 'uk-accordion-content')
-    accordionContent.setAttribute('id', 'accordion-content')
-    return accordionContent
-  }
+  // createAccordionContent() {
+  //   let accordionContent = document.createElement('div')
+  //   accordionContent.setAttribute('class', 'uk-accordion-content')
+  //   accordionContent.setAttribute('id', 'accordion-content')
+  //   return accordionContent
+  // }
 
-  createAccordionTitle(){
-    let title = document.createElement('a')
-    title.setAttribute('class', 'uk-accordion-title')
-    title.setAttribute('href', '#')
-    title.setAttribute('id', `${this.budget.id}`)
-    title.innerText = `Paycheck: $${this.income}`
-    return title
-  }
+  // createAccordionTitle(){
+  //   let title = document.createElement('a')
+  //   title.setAttribute('class', 'uk-accordion-title')
+  //   title.setAttribute('href', '#')
+  //   title.setAttribute('id', `${this.budget.id}`)
+  //   title.innerText = `Paycheck: $${this.income}`
+  //   return title
+  // }
 
-  createAccordionInput(){
-    let input = document.createElement('input')
-    input.setAttribute('id', 'income-amount')
-    input.setAttribute('type', 'number')
-    input.setAttribute('name', 'income')
-    input.setAttribute('placeholder', 'Check amount')
-    input.setAttribute('value', `${this.income}`)
-    input.addEventListener('change', (e) => {this.income = e.target.value})
-    return input 
-  }
+  // createAccordionInput(){
+  //   let input = document.createElement('input')
+  //   input.setAttribute('id', 'income-amount')
+  //   input.setAttribute('type', 'number')
+  //   input.setAttribute('name', 'income')
+  //   input.setAttribute('placeholder', 'Check amount')
+  //   input.setAttribute('value', `${this.income}`)
+  //   input.addEventListener('change', (e) => {this.income = e.target.value})
+  //   return input 
+  // }
 
   createAccordionSaveButton(){
     let eventFn = (e) => {
