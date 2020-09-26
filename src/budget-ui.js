@@ -1,10 +1,3 @@
-const saveIncomeType = (e) => {
-  e.preventDefault()
-  const value = e.target.elements[0].value
-  resetBudget()
-  resetExpense()
-  Budget.createBudgets(value)
-}
 
 const saveIncomeToBudget = (e) => {
   e.preventDefault()
