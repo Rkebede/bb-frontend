@@ -49,7 +49,7 @@ class ExpenseForm {
     amount.setAttribute('name', 'amount')
     amount.setAttribute('placeholder', 'Expense Amount')
     amount.value = this.amount
-    amount.addEventListener('change', (e)=>{this.name = e.target.value})
+    amount.addEventListener('change', (e)=>{this.amount = e.target.value})
     return amount
   }
 
@@ -57,7 +57,11 @@ class ExpenseForm {
     let saveButton = document.createElement('button', 'save')
     saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
     saveButton.innerText = 'Save'
-    saveButton.addEventListener('click', this.saveValuesToExpense)
+    saveButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.expense.update({ name: this.name, amount: this.amount })
+
+    })
     return saveButton
   }
 
@@ -65,25 +69,11 @@ class ExpenseForm {
     let deleteButton = document.createElement('button', 'delete')
     deleteButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
     deleteButton.innerText = 'Delete'
-    deleteButton.addEventListener('click', this.deleteExpense)
+    deleteButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.expense.delete()
+    })
     return deleteButton
   }
 
-  saveValuesToExpense(e){
-    e.preventDefault()
-    this.expense.update({ name: this.name, amount: this.amount })
-  }
-
-  deleteExpense = (e) => {
-    e.preventDefault()
-    this.expense.delete()
-  }
-}
-
-//budgetAccordion
-const removeExpenseForm = () => {
-  let form = document.getElementById('expenses-form')
-  if (form) {
-    document.getElementById('expenses-form').remove()
-  }
 }

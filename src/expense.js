@@ -29,7 +29,6 @@ class Expense {
 
   static reset(){
     Expense.all = {}
-    removeExpenseForm()
   }
 
   update(body){
