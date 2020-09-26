@@ -76,4 +76,8 @@ class ExpenseForm {
     return deleteButton
   }
 
+  remove(){
+    document.getElementById(this.expense.id).remove()
+  }
+
 }

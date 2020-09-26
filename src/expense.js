@@ -11,7 +11,7 @@ class Expense {
     this.expenseForm = new ExpenseForm(this)
   }
 
-  static findById(id){
+  static findById(id) {
     return Expense.all[id]
   }
 
@@ -23,20 +23,19 @@ class Expense {
 
   delete() {
     API.deleteRequest(`/expenses/${this.id}`)
-    document.getElementById(this.id).remove()
+    this.expenseForm.remove() 
     delete Expense.all[this.id]
   }
 
-  static reset(){
+  static reset() {
     Expense.all = {}
   }
 
-  update(body){
+  update(body) {
     API.patchRequest(`/expenses/${this.id}`, body).then((resp) => {
       this.name = resp.name
       this.amount = resp.amount
     })
-
   }
 
 }

@@ -63,6 +63,7 @@ class Budget {
       this.expenses.push(expense)
     })
   }
+  
   // totalExpenses() {
   //   this.expenses.reduce((acc, expense) => {
   //     return acc + expense

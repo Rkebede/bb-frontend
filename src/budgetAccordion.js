@@ -1,7 +1,9 @@
 class BudgetAccordion {
   constructor(budget) {
     this.budget = budget
+    this.income = budget.income
     this.renderBudgetAccordion()
+    
   }
 
   renderBudgetAccordion() {
@@ -33,7 +35,7 @@ class BudgetAccordion {
     title.setAttribute('class', 'uk-accordion-title')
     title.setAttribute('href', '#')
     title.setAttribute('id', `${this.budget.id}`)
-    title.innerText = `Paycheck: $${this.budget.income}`
+    title.innerText = `Paycheck: $${this.income}`
     return title
   }
 
@@ -43,7 +45,8 @@ class BudgetAccordion {
     input.setAttribute('type', 'number')
     input.setAttribute('name', 'income')
     input.setAttribute('placeholder', 'Check amount')
-    input.setAttribute('value', `${this.budget.income}`)
+    input.setAttribute('value', `${this.income}`)
+    input.addEventListener('change', (e) => {this.income = e.target.value})
     return input 
   }
 
@@ -52,12 +55,16 @@ class BudgetAccordion {
     saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
     saveButton.setAttribute('id', 'save-amount')
     saveButton.innerText = 'Save'
-    saveButton.addEventListener('click', saveIncomeToBudget)
+    saveButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.budget.setIncome(this.income)
+    })
+      
     return saveButton
   }
 
   setPaycheckAmount() {
-    document.getElementById(this.budget.id).innerText = `Paycheck : $${this.budget.income}`
+    document.getElementById(this.budget.id).innerText = `Paycheck : $${this.income}`
   }
 
   static renderIncomeTotal(){
@@ -79,8 +86,5 @@ class BudgetAccordion {
     form.setAttribute('id', 'expenses-form')
     accordion.appendChild(form)
   }
-
-
-  
 
 }
