@@ -8,7 +8,7 @@ class Budget {
     this.expenses = expenses
     this.constructor.all = { ...this.constructor.all, [id]: this }
     this.accordion = new BudgetAccordion(this)
-  };
+  }
 
   static findById(id) {
     return this.all[id]
@@ -71,6 +71,7 @@ class Budget {
   //   return Object.values(this.expenses)
   // }
 }
+
 
 
 

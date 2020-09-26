@@ -6,7 +6,6 @@ const saveIncomeToBudget = (e) => {
   Budget.findById(id).setIncome(value)
 }
 
-
 const parentBudget = (e) => {
   let id = e.target.parentElement.previousElementSibling.id
   let budget = Budget.findById(id)
