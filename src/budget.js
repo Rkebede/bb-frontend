@@ -63,9 +63,9 @@ class Budget {
       const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
       this.expenses.push(expense)
       ExpenseForm.findOrCreateExpenseAccordion()
-    })   
+    })
   }
-  
+
   // totalExpenses() {
   //   this.expenses.reduce((acc, expense) => {
   //     return acc + expense
@@ -80,6 +80,7 @@ class Budget {
   //   return Object.values(this.expenses)
   // }
 }
+
 
 
 

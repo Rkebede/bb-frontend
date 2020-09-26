@@ -7,7 +7,7 @@ class Accordion {
     return accordionContent
   }
 
-  static createAccordionTitle(id, titleText){
+  static createAccordionTitle(id, titleText) {
     let title = document.createElement('a')
     title.setAttribute('class', 'uk-accordion-title')
     title.setAttribute('href', '#')
@@ -16,13 +16,13 @@ class Accordion {
     return title
   }
 
-  static createAccordionInput(value){
+  static createAccordionInput(value) {
     let input = document.createElement('input')
     input.setAttribute('id', 'income-amount')
     input.setAttribute('type', 'number')
     input.setAttribute('name', 'income')
     input.setAttribute('placeholder', 'Check amount')
     input.setAttribute('value', value)
-    return input 
+    return input
   }
 }

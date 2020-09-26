@@ -23,7 +23,7 @@ class Expense {
 
   delete() {
     API.deleteRequest(`/expenses/${this.id}`)
-    this.expenseForm.remove() 
+    this.expenseForm.remove()
     delete Expense.all[this.id]
   }
 

@@ -1,4 +1,5 @@
 class ExpenseForm {
+
   constructor(expense) {
     this.expense = expense
     this.name = expense.name
@@ -21,20 +22,44 @@ class ExpenseForm {
     input.appendChild(deleteButton)
   }
 
-  static findOrCreateExpenseAccordion(){
-    // let expenseAccordion = document.getElementById('all-expenses')
-    if (!document.getElementById('all-expenses')){
-    let expenseAccordion = document.createElement('li')
-    accordionContainer.appendChild(expenseAccordion)
-    const accordionContent = Accordion.createAccordionContent()
-    expenseAccordion.appendChild(accordionContent)
-    const title = Accordion.createAccordionTitle('all-expenses', 'All Expenses')
-    expenseAccordion.appendChild(title)
+  static findOrCreateExpenseAccordion() {
+    if (!document.getElementById('all-expenses')) {
+      let expenseAccordion = document.createElement('li')
+      accordionContainer.appendChild(expenseAccordion)
+      const accordionContent = Accordion.createAccordionContent()
+      const title = Accordion.createAccordionTitle('all-expenses', 'All Expenses')
+      expenseAccordion.appendChild(title)
+      expenseAccordion.appendChild(accordionContent)
+      accordionContent.innerHTML =
+        `<table class="uk-table uk-table-striped">
+      <thead>
+          <tr>
+              <th>Expense</th>
+              <th>Amount</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Rent</td>
+              <td>2000</td>
+              <td>${deleteExpenseButton()}</td>
+          </tr>
+          <tr>
+              <td>Table Data</td>
+              <td>Table Data</td>
+              <td>Table Data</td>
+          </tr>
+          <tr>
+              <td>Table Data</td>
+              <td>Table Data</td>
+              <td>Table Data</td>
+          </tr>
+      </tbody>
+  </table>
+          `
     }
-      
   }
-
-  // renderAllExpenses
 
   findOrCreateForm() {
     let form = document.getElementById(this.expense.budget_id).nextElementSibling.lastChild
