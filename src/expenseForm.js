@@ -1,6 +1,8 @@
 class ExpenseForm {
   constructor(expense) {
     this.expense = expense
+    this.name = expense.name
+    this.amount = expense.amount
     this.renderExpenseFields()
   }
 
@@ -12,13 +14,10 @@ class ExpenseForm {
     let name = this.expenseName()
     input.appendChild(name)
     let amount = this.expenseAmount()
-
     input.appendChild(amount)
     let saveButton = this.saveExpenseButton()
-
     input.appendChild(saveButton)
     let deleteButton = this.deleteExpenseButton()
-
     input.appendChild(deleteButton)
   }
 
@@ -38,7 +37,8 @@ class ExpenseForm {
     name.setAttribute('type', 'text')
     name.setAttribute('name', 'name')
     name.setAttribute('placeholder', 'Expense Name')
-    name.value = this.expense.name
+    name.value = this.name
+    name.addEventListener('change', (e)=>{this.name = e.target.value})
     return name
   }
 
@@ -48,7 +48,8 @@ class ExpenseForm {
     amount.setAttribute('type', 'text')
     amount.setAttribute('name', 'amount')
     amount.setAttribute('placeholder', 'Expense Amount')
-    amount.value = this.expense.amount
+    amount.value = this.amount
+    amount.addEventListener('change', (e)=>{this.name = e.target.value})
     return amount
   }
 
@@ -56,7 +57,7 @@ class ExpenseForm {
     let saveButton = document.createElement('button', 'save')
     saveButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
     saveButton.innerText = 'Save'
-    saveButton.addEventListener('click', saveValuesToExpense)
+    saveButton.addEventListener('click', this.saveValuesToExpense)
     return saveButton
   }
 
@@ -64,24 +65,19 @@ class ExpenseForm {
     let deleteButton = document.createElement('button', 'delete')
     deleteButton.setAttribute('class', 'uk-button uk-button-default uk-button-small')
     deleteButton.innerText = 'Delete'
-    deleteButton.addEventListener('click', deleteExpense)
+    deleteButton.addEventListener('click', this.deleteExpense)
     return deleteButton
   }
 
-}
+  saveValuesToExpense(e){
+    e.preventDefault()
+    this.expense.update({ name: this.name, amount: this.amount })
+  }
 
-const saveValuesToExpense = (e) => {
-  e.preventDefault()
-  const expense = Expense.all[e.target.parentElement.id]
-  const name = e.target.parentElement.elements[0].value
-  const amount = e.target.parentElement.elements[1].value
-  expense.update({ name, amount })
-}
-
-const deleteExpense = (e) => {
-  e.preventDefault()
-  const expenseId = e.target.parentElement.id
-  Expense.findById(expenseId).delete()
+  deleteExpense = (e) => {
+    e.preventDefault()
+    this.expense.delete()
+  }
 }
 
 //budgetAccordion
