@@ -57,4 +57,13 @@ class BudgetAccordion {
   }
 
 
+  setPaycheckAmount() {
+    document.getElementById(this.budget.id).innerText = `Paycheck : $${this.budget.income}`
+  }
+
+  static renderIncomeTotal(){
+    document.getElementById('total').innerText = `Total: $${Budget.incomeTotal()}`
+
+  }
+
 }

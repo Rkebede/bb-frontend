@@ -7,7 +7,7 @@ class Budget {
     this.id = id
     this.expenses = expenses
     this.constructor.all = { ...this.constructor.all, [id]: this }
-    new BudgetAccordion(this)
+    this.accordion = new BudgetAccordion(this)
   };
 
   static findById(id) {
@@ -23,7 +23,7 @@ class Budget {
         })
         showForms()
         IncomeTypeForm.setIncomeType(resp.length)
-        document.getElementById('total').innerText = `Total: $${incomeTotal()}`
+        BudgetAccordion.renderIncomeTotal()
       }
     })
   }
@@ -40,10 +40,22 @@ class Budget {
   setIncome(incomeAmount) {
     API.patchRequest(`/budgets/${this.id}`, { income: incomeAmount }).then((resp) => {
       this.income = resp.income
-      setPaycheckAmount(this)
-      document.getElementById('total').innerText = `Total: $${incomeTotal()}`
+      this.accordion.setPaycheckAmount()
+      BudgetAccordion.renderIncomeTotal()
     })
   }
+
+  static reset() {
+    API.deleteRequest('/budgets')
+    this.all = {}
+    document.getElementById('total').innerText = `Total: $0`
+    document.getElementById('uk-accordion').innerHTML = ''
+  }
+
+  static incomeTotal() {
+    return Object.values(this.all).reduce((acc, budget) => { return budget.income + acc }, 0)
+  }
+
 
   // totalExpenses() {
   //   this.expenses.reduce((acc, expense) => {
