@@ -19,17 +19,22 @@ class ExpenseForm {
     input.appendChild(saveButton)
     let deleteButton = this.deleteExpenseButton()
     input.appendChild(deleteButton)
-    this.renderExpenseAccordion()
   }
 
-  renderExpensesAccordion(){
+  static findOrCreateExpenseAccordion(){
+    // let expenseAccordion = document.getElementById('all-expenses')
+    if (!document.getElementById('all-expenses')){
     let expenseAccordion = document.createElement('li')
     accordionContainer.appendChild(expenseAccordion)
     const accordionContent = Accordion.createAccordionContent()
     expenseAccordion.appendChild(accordionContent)
     const title = Accordion.createAccordionTitle('all-expenses', 'All Expenses')
-    expenseAccordion.appendChild(title)  
+    expenseAccordion.appendChild(title)
+    }
+      
   }
+
+  // renderAllExpenses
 
   findOrCreateForm() {
     let form = document.getElementById(this.expense.budget_id).nextElementSibling.lastChild

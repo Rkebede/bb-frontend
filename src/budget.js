@@ -22,6 +22,7 @@ class Budget {
           budget.expenses = Expense.createExpensesForBudget(budgetObj)
         })
         showForms()
+        ExpenseForm.findOrCreateExpenseAccordion()
         IncomeTypeForm.setIncomeType(resp.length)
         BudgetAccordion.renderIncomeTotal()
       }
@@ -61,7 +62,8 @@ class Budget {
     API.postResquest('/expenses', body).then((resp) => {
       const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
       this.expenses.push(expense)
-    })
+      ExpenseForm.findOrCreateExpenseAccordion()
+    })   
   }
   
   // totalExpenses() {
