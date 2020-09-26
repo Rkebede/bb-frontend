@@ -3,12 +3,7 @@ const saveIncomeToBudget = (e) => {
   e.preventDefault()
   const value = e.target.previousElementSibling.value
   const id = e.target.parentElement.parentElement.previousSibling.id
-  API.patchRequest(`/budgets/${id}`, { income: value }).then((resp) => {
-    let budget = Budget.all[resp.id]
-    budget.income = resp.income
-    setPaycheckAmount(budget)
-    document.getElementById('total').innerText = `Total: $${incomeTotal()}`
-  })
+  Budget.findById(id).setIncome(value)
 }
 
 const setPaycheckAmount = (budget) => {

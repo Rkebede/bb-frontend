@@ -37,6 +37,14 @@ class Budget {
     }
   }
 
+  setIncome(incomeAmount) {
+    API.patchRequest(`/budgets/${this.id}`, { income: incomeAmount }).then((resp) => {
+      this.income = resp.income
+      setPaycheckAmount(this)
+      document.getElementById('total').innerText = `Total: $${incomeTotal()}`
+    })
+  }
+
   // totalExpenses() {
   //   this.expenses.reduce((acc, expense) => {
   //     return acc + expense
