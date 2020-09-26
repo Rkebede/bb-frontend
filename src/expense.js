@@ -8,7 +8,7 @@ class Expense {
     this.budget_id = budget_id;
     this.amount = amount;
     this.constructor.all = { ...this.constructor.all, [id]: this }
-    createNewExpenseFields(this)
+    this.expenseForm = new ExpenseForm(this)
   }
 
   static findById(id){
@@ -31,4 +31,13 @@ class Expense {
     Expense.all = {}
     removeExpenseForm()
   }
+
+  update(body){
+    API.patchRequest(`/expenses/${this.id}`, body).then((resp) => {
+      this.name = resp.name
+      this.amount = resp.amount
+    })
+
+  }
+
 }

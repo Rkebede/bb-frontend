@@ -79,4 +79,7 @@ class BudgetAccordion {
     form.setAttribute('id', 'expenses-form')
     accordion.appendChild(form)
   }
+
+  
+
 }
