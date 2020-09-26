@@ -18,7 +18,7 @@ class BudgetAccordion {
     incomeform.appendChild(saveButton)
     accordionContent.appendChild(incomeform)
     budgetAccordion.appendChild(accordionContent)
-    expenseForm(this.budget)
+    this.renderExpenseFormContainer()
   }
 
   createAccordionContent() {
@@ -64,4 +64,19 @@ class BudgetAccordion {
     document.getElementById('total').innerText = `Total: $${Budget.incomeTotal()}`
   }
 
+  renderExpenseFormContainer() {
+    let accordion = document.getElementById(this.budget.id).nextElementSibling
+    let expenseHeader = document.createElement('h1')
+    expenseHeader.innerText = 'Expense'
+    accordion.appendChild(expenseHeader)
+    let button = document.createElement('button')
+    button.setAttribute('id', 'new-expense')
+    button.setAttribute('class', 'uk-button uk-button-default uk-button-small')
+    button.innerText = 'Add Expense'
+    button.addEventListener('click', (e) => this.budget.addExpense())
+    accordion.appendChild(button)
+    let form = document.createElement('form')
+    form.setAttribute('id', 'expenses-form')
+    accordion.appendChild(form)
+  }
 }

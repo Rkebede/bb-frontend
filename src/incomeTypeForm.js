@@ -17,7 +17,7 @@ class IncomeTypeForm {
     e.preventDefault()
     const value = e.target.elements[0].value
     Budget.reset()
-    resetExpense()
+    Expense.reset()
     Budget.createBudgets(value)
   }
 } 

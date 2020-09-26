@@ -45,6 +45,10 @@ class Budget {
     })
   }
 
+  static incomeTotal() {
+    return Object.values(this.all).reduce((acc, budget) => { return budget.income + acc }, 0)
+  }
+
   static reset() {
     API.deleteRequest('/budgets')
     this.all = {}
@@ -52,11 +56,13 @@ class Budget {
     document.getElementById('uk-accordion').innerHTML = ''
   }
 
-  static incomeTotal() {
-    return Object.values(this.all).reduce((acc, budget) => { return budget.income + acc }, 0)
+  addExpense() {
+    const body = { budget_id: this.id, amount: 0, name: "" }
+    API.postResquest('/expenses', body).then((resp) => {
+      const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
+      this.expenses.push(expense)
+    })
   }
-
-
   // totalExpenses() {
   //   this.expenses.reduce((acc, expense) => {
   //     return acc + expense

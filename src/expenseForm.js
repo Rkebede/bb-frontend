@@ -1,3 +1,8 @@
+class ExpenseForm {
+  constructor(expense){
+    this.expense = expense
+  }
+}
 
 const addExpense = (e) => {
   let budget = parentBudget(e)
@@ -6,22 +11,6 @@ const addExpense = (e) => {
     const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
     budget.expenses = { ...budget.expenses, [expense.id]: expense }
   })
-}
-
-const expenseForm = (budget) => {
-  let accordion = document.getElementById(budget.id).nextElementSibling
-  let expense = document.createElement('h1')
-  expense.innerText = 'Expense'
-  accordion.appendChild(expense)
-  let button = document.createElement('button')
-  button.setAttribute('id', 'new-expense')
-  button.setAttribute('class', 'uk-button uk-button-default uk-button-small')
-  button.innerText = 'Add Expense'
-  button.addEventListener('click', addExpense)
-  accordion.appendChild(button)
-  let form = document.createElement('form')
-  form.setAttribute('id', 'expenses-form')
-  accordion.appendChild(form)
 }
 
 const createNewExpenseFields = (expense) => {
@@ -75,16 +64,10 @@ const saveValuesToExpense = (e) => {
 const deleteExpense = (e) => {
   e.preventDefault()
   const expenseId = e.target.parentElement.id
-  API.deleteRequest(`/expenses/${expenseId}`)
-  document.getElementById(expenseId).remove()
-  delete Expense.all[expenseId]
+  Expense.findById(expenseId).delete()
 }
 
-const resetExpense = () => {
-  Expense.all = {}
-  removeExpenseForm()
-}
-
+//budgetAccordion
 const removeExpenseForm = () => {
   let form = document.getElementById('expenses-form')
   if (form) {
