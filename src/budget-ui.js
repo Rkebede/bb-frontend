@@ -1,20 +1,9 @@
-const setIncomeType = (budgetCount) => {
-  if (budgetCount > 0) {
-    document.getElementById('income-type').value = budgetCount
-  }
-}
-
 const saveIncomeType = (e) => {
   e.preventDefault()
   const value = e.target.elements[0].value
   resetBudget()
   resetExpense()
-  for (let i = 0; i < value; i++) {
-    API.postResquest("/budgets", { income: 0 }).then(resp => {
-      new Budget(resp.id, resp.income, resp.expenses)
-      showForms()
-    })
-  }
+  Budget.createBudgets(value)
 }
 
 const saveIncomeToBudget = (e) => {

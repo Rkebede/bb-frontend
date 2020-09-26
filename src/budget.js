@@ -17,19 +17,24 @@ class Budget {
   static getBudgets() {
     API.getRequest("/budgets").then(resp => {
       if (resp.length !== 0) {
-        this.createBudgets(resp)
+        resp.forEach((budgetObj) => {
+          const budget = new Budget(budgetObj.id, budgetObj.income)
+          budget.expenses = Expense.createExpensesForBudget(budgetObj)
+        })
         showForms()
-        setIncomeType(resp.length)
+        IncomeTypeForm.setIncomeType(resp.length)
         document.getElementById('total').innerText = `Total: $${incomeTotal()}`
       }
     })
   }
 
-  static createBudgets(budgetObjs) {
-    budgetObjs.forEach((budgetObj) => {
-      const budget = new Budget(budgetObj.id, budgetObj.income)
-      budget.expenses = Expense.createExpensesForBudget(budgetObj)
-    })
+  static createBudgets(budgetCount) {
+    for (let i = 0; i < budgetCount; i++) {
+      API.postResquest("/budgets", { income: 0 }).then(resp => {
+        new Budget(resp.id, resp.income, resp.expenses)
+        showForms()
+      })
+    }
   }
 
   // totalExpenses() {
