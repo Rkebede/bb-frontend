@@ -1,4 +1,6 @@
 let accordionContainer = document.getElementById('uk-accordion')
+let expenseAccordion
+
 
 document.addEventListener('DOMContentLoaded', () => {
   IncomeTypeForm.setEventListeners()

@@ -9,6 +9,7 @@ class Expense {
     this.amount = amount;
     this.constructor.all = { ...this.constructor.all, [id]: this }
     this.expenseForm = new ExpenseForm(this)
+    this.expenseCell = new ExpenseCell(this)
   }
 
   static findById(id) {
