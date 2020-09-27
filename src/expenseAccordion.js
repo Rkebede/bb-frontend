@@ -13,7 +13,7 @@ class ExpenseAccordion {
       const title = Accordion.createAccordionTitle('all-expenses', 'All Expenses')
       expenseAccordion.appendChild(title)
       expenseAccordion.appendChild(accordionContent)
-      accordionContent.innerHTML = this.expenseTable.render()
+      accordionContent.appendChild(this.expenseTable.render())
     }
   }
 }

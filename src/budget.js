@@ -20,7 +20,7 @@ class Budget {
         resp.forEach((budgetObj) => {
           const budget = new Budget(budgetObj.id, budgetObj.income)
           if (budgetObj.expenses.length > 0){
-            expenseAccordion = new ExpenseAccordion()
+            expenseAccordion = expenseAccordion || new ExpenseAccordion()
             budget.expenses = Expense.createExpensesForBudget(budgetObj)
           }
         })
@@ -62,7 +62,7 @@ class Budget {
   addExpense() {
     const body = { budget_id: this.id, amount: 0, name: "" }
     API.postResquest('/expenses', body).then((resp) => {
-      expenseAccordion = new ExpenseAccordion()      
+      expenseAccordion = expenseAccordion || new ExpenseAccordion()
       const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
       this.expenses.push(expense)
     })

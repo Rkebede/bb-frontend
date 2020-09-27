@@ -6,5 +6,9 @@ class ExpenseCell {
   }
 
 
+  remove() {
+    document.getElementById(this.expense.id).remove()
+  }
+
 
 }
