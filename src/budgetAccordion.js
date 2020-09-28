@@ -9,13 +9,17 @@ class BudgetAccordion {
     let budgetAccordion = document.createElement('li')
     accordionContainer.appendChild(budgetAccordion)
     const accordionContent = Accordion.createAccordionContent()
-    const title = Accordion.createAccordionTitle(this.budget.id, `Paycheck: $${this.income}`)
+    const title = Accordion.createAccordionTitle(this.budget.id, `Paycheck : $${this.income}`)
     budgetAccordion.appendChild(title)
     let incomeform = document.createElement('form')
     incomeform.setAttribute('id', 'income-form')
     const input = Accordion.createAccordionInput(this.income)
     input.addEventListener('change', (e) => { this.income = e.target.value })
     incomeform.appendChild(input)
+    const unallocated = document.createElement('h4')
+    unallocated.setAttribute('id', `unallocated-${this.budget.id}`)
+    unallocated.innerText = `Unallocated Funds : $${this.income - this.budget.expenseTotal()}`
+    accordionContent.appendChild(unallocated)
     const saveButton = this.createAccordionSaveButton()
     incomeform.appendChild(saveButton)
     accordionContent.appendChild(incomeform)
@@ -34,10 +38,13 @@ class BudgetAccordion {
 
   setPaycheckAmount() {
     document.getElementById(this.budget.id).innerText = `Paycheck : $${this.income}`
+    document.getElementById(`unallocated-${this.budget.id}`).innerText = `Unallocated Funds : $${this.income - this.budget.expenseTotal()}`
+
   }
 
   static renderIncomeTotal() {
-    document.getElementById('total').innerText = `Total: $${Budget.incomeTotal()}`
+    document.getElementById('total').innerText = `Total Income : $${Budget.incomeTotal()}`
+    document.getElementById('unallocated').innerText = `Unallocated Funds: $${Budget.incomeTotal() - Expense.total()}`
   }
 
   renderExpenseFormContainer() {

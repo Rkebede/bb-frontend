@@ -7,7 +7,13 @@ class ExpenseCell {
 
 
   remove() {
-    document.getElementById(this.expense.id).remove()
+    document.getElementById(`cell-${this.expense.id}`).remove()
+  }
+
+  update(){
+    let cell = document.getElementById(`cell-${this.expense.id}`)
+    cell.querySelector('#cell-name').innerText = this.expense.name
+    cell.querySelector('#cell-amount').innerText = this.expense.amount
   }
 
 

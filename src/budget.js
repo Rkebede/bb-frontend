@@ -19,11 +19,13 @@ class Budget {
       if (resp.length !== 0) {
         resp.forEach((budgetObj) => {
           const budget = new Budget(budgetObj.id, budgetObj.income)
-          if (budgetObj.expenses.length > 0){
-            expenseAccordion = expenseAccordion || new ExpenseAccordion()
+          if (budgetObj.expenses.length > 0) {
             budget.expenses = Expense.createExpensesForBudget(budgetObj)
+            budget.accordion.setPaycheckAmount()
           }
         })
+        expenseAccordion = expenseAccordion || new ExpenseAccordion()
+        expenseAccordion.appendAllExpenses()
         showForms()
         IncomeTypeForm.setIncomeType(resp.length)
         BudgetAccordion.renderIncomeTotal()
@@ -55,32 +57,26 @@ class Budget {
   static reset() {
     API.deleteRequest('/budgets')
     this.all = {}
-    document.getElementById('total').innerText = `Total: $0`
+    document.getElementById('total').innerText = `Total Income : $0`
+    document.getElementById('unallocated').innerText = `Unallocated Funds : $0`
     document.getElementById('uk-accordion').innerHTML = ''
   }
 
   addExpense() {
     const body = { budget_id: this.id, amount: 0, name: "" }
     API.postResquest('/expenses', body).then((resp) => {
-      expenseAccordion = expenseAccordion || new ExpenseAccordion()
       const expense = new Expense(resp.id, resp.name, resp.budget_id, resp.amount)
       this.expenses.push(expense)
+      expenseAccordion = expenseAccordion || new ExpenseAccordion()
+      expenseAccordion.appendExpense(expense)
     })
   }
 
-  // totalExpenses() {
-  //   this.expenses.reduce((acc, expense) => {
-  //     return acc + expense
-  //   }, 0)
-  // }
-
-  // expensesMinusIncome() {
-  //   return this.income - this.totalExpenses
-  // }
-
-  // expenseValues() {
-  //   return Object.values(this.expenses)
-  // }
+  expenseTotal() {
+    return this.expenses.reduce((acc, expense) => {
+      return expense.amount + acc
+    }, 0)
+  }
 }
 
 

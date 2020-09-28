@@ -18,6 +18,7 @@ class Accordion {
 
   static createAccordionInput(value) {
     let input = document.createElement('input')
+    input.setAttribute('class', 'uk-input uk-width-medium')
     input.setAttribute('id', 'income-amount')
     input.setAttribute('type', 'number')
     input.setAttribute('name', 'income')

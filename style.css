@@ -1,0 +1,14 @@
+*+.uk-margin{
+  width: 50%
+}
+
+fieldset{
+  border: none;
+  padding-block-start: 1em;
+  padding-inline-start: 0em;
+}
+
+.uk-button-small{
+  line-height: 38px;
+  margin-left: 5px;
+}

@@ -13,8 +13,10 @@ class ExpenseForm {
     input.setAttribute('id', this.expense.id)
     form.appendChild(input)
     let name = this.expenseName()
+    name.setAttribute('class', `uk-input uk-width-1-3`)
     input.appendChild(name)
     let amount = this.expenseAmount()
+    amount.setAttribute('class', `uk-input uk-width-1-3`)
     input.appendChild(amount)
     let saveButton = this.saveExpenseButton()
     input.appendChild(saveButton)
@@ -24,13 +26,7 @@ class ExpenseForm {
   }
 
   findOrCreateForm() {
-    let form = document.getElementById(this.expense.budget_id).nextElementSibling.lastChild
-    if (!form) {
-      form = document.createElement('form')
-      form.setAttribute('id', 'expenses-form')
-      document.getElementById('hidden-expenses').appendChild(form)
-    }
-    return form
+    return document.getElementById(this.expense.budget_id).nextElementSibling.lastChild
   }
 
   expenseName() {

@@ -9,7 +9,7 @@ class Expense {
     this.amount = amount;
     this.constructor.all = { ...this.constructor.all, [id]: this }
     this.expenseForm = new ExpenseForm(this)
-    this.expenseCell = new ExpenseCell(this)
+    this.expenseCell = null
   }
 
   static findById(id) {
@@ -18,7 +18,7 @@ class Expense {
 
   static createExpensesForBudget(budget) {
     return budget.expenses.map(expenseObj => {
-      new Expense(expenseObj.id, expenseObj.name, budget.id, expenseObj.amount)
+      return new Expense(expenseObj.id, expenseObj.name, budget.id, expenseObj.amount)
     })
   }
 
@@ -27,17 +27,27 @@ class Expense {
     this.expenseForm.remove()
     this.expenseCell.remove()
     delete Expense.all[this.id]
+    expenseAccordion.updateTotal()
+    Budget.findById(this.budget_id).accordion.setPaycheckAmount()
   }
 
   static reset() {
     Expense.all = {}
+    expenseAccordion = null
   }
 
   update(body) {
     API.patchRequest(`/expenses/${this.id}`, body).then((resp) => {
       this.name = resp.name
       this.amount = resp.amount
-    })
+      this.expenseCell.update()
+      expenseAccordion.updateTotal()
+    }).then(()=> Budget.findById(this.budget_id).accordion.setPaycheckAmount()) 
   }
+
+ static total(){
+    return Object.values(Expense.all).reduce((acc, expense) => { return expense.amount + acc }, 0)
+  }
+
 
 }

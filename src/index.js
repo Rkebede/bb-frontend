@@ -1,5 +1,5 @@
 let accordionContainer = document.getElementById('uk-accordion')
-let expenseAccordion
+let expenseAccordion = null
 
 
 document.addEventListener('DOMContentLoaded', () => {
