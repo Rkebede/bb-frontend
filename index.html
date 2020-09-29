@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" style="height: 100%;">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
   <title>Budget Buddy</title>
-  <link rel="stylesheet" href="style.css">  
+  <link rel="stylesheet" href="css/style.css">  
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+  <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist"></script>
   <script src="src/budget.js" charset="UTF-8"></script>
   <script src="src/budgetAccordion.js" charset="UTF-8"></script>
   <script src="src/accordion.js" charset="UTF-8"></script>
@@ -18,19 +19,19 @@
   <script src="src/expenseCell.js" charset="UTF-8"></script>
   <script src="src/incomeTypeForm.js" charset="UTF-8"></script>
   <script src="src/requests.js" charset="UTF-8"></script>
-  <script src="src/requests.js" charset="UTF-8"></script>
+  <script src="src/piechart.js" charset="UTF-8"></script>
   <script type="application/javascript" defer src="src/index.js" charset="UTF-8"></script>
 </head>
 
-<body class="uk-background-muted" style="height: 100%;">
+<body id="body">
   <header class="uk-heading-line uk-text-center">
     <h1 class="uk-padding" class="uk-text-bold">Welcome to Budget Buddy</h1>
   </header>
 
 
   <ul class="uk-subnav uk-subnav-pill uk-padding" uk-switcher="connect: .switcher-container">
-    <li><a href="#">Income Type </a></li>
-    <li><a href="#">Paychecks</a></li>
+    <li><a id="income-container" href="#">Income Type </a></li>
+    <li id="paycheck-container"><a href="#">Paychecks</a></li>
   </ul>
 
   <ul class="uk-switcher switcher-container uk-margin">
@@ -49,18 +50,15 @@
     <li>
       <div id="paycheck-tab" style="display: none;">
         <div class="uk-padding" id="hidden-dropdown">
-          <h1 style="display: inline;" id="total"></h1><br>
+          <h1 style="display: inline;" id="total"></h1><br><br>
           <h2 style="display: inline;" id="unallocated"></h2>
-
           <ul uk-accordion id="uk-accordion">
-
           </ul>
-
-
         </div>
       </div>
     </li>
   </ul>
+
 </body>
 
 

@@ -4,6 +4,7 @@ class ExpenseAccordion {
     this.expenseTable = new ExpenseTable()
     this.title = null
     this.findOrCreateExpenseAccordion()
+    new Piechart ()
   }
 
   findOrCreateExpenseAccordion() {

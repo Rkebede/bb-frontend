@@ -5,7 +5,7 @@ class ExpenseTable {
 
   render() { 
     let table = document.createElement('table')
-    table.setAttribute('class', 'uk-table uk-table-hover') 
+    table.setAttribute('class', 'uk-table uk-table-striped') 
     let tableHeaders = document.createElement('thead')
     table.appendChild(tableHeaders)
     let row = document.createElement('tr')
@@ -40,5 +40,7 @@ class ExpenseTable {
     row.appendChild(deleteButton)
     table.appendChild(row)
   }
+
+
 
 }

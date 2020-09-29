@@ -1,0 +1,31 @@
+.uk-switcher{
+  width: 50%
+}
+
+fieldset{
+  border: none;
+  padding-block-start: 1em;
+  padding-inline-start: 0em;
+}
+
+.uk-button-small{
+  line-height: 38px;
+  margin-left: 5px;
+}
+
+.piechart { 
+  margin-top: 10px;
+  display: block;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-image: conic-gradient( #0f6ecd 70deg, #084581 0 235deg, #e6e6e6 0);
+} 
+
+body, 
+.piechart { 
+    display: list-item;
+    justify-content: flex-end;
+    align-items: end;
+} 

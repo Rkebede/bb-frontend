@@ -24,8 +24,10 @@ class Budget {
             budget.accordion.setPaycheckAmount()
           }
         })
-        expenseAccordion = expenseAccordion || new ExpenseAccordion()
-        expenseAccordion.appendAllExpenses()
+        if (Expense.all.length > 0 && !expenseAccordion){
+          expenseAccordion = new ExpenseAccordion()        
+          expenseAccordion.appendAllExpenses()
+        }
         showForms()
         IncomeTypeForm.setIncomeType(resp.length)
         BudgetAccordion.renderIncomeTotal()
