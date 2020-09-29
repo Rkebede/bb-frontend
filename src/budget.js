@@ -50,7 +50,7 @@ class Budget {
       this.income = resp.income
       this.accordion.setPaycheckAmount()
       BudgetAccordion.renderIncomeTotal()
-      progressBar = progressBar || new ProgressBar(this.income, this.expenseTotal())
+      progressBar.update(this.income, this.expenseTotal())
     })
   }
 
@@ -64,6 +64,7 @@ class Budget {
     document.getElementById('total').innerText = `Total Income : $0`
     document.getElementById('unallocated').innerText = `Unallocated Funds : $0`
     document.getElementById('uk-accordion').innerHTML = ''
+    progressBar = new ProgressBar(Budget.incomeTotal(), Expense.total())
   }
 
   addExpense() {
