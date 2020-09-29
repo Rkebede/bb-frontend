@@ -22,7 +22,6 @@ class Budget {
           if (budgetObj.expenses.length > 0) {
             budget.expenses = Expense.createExpensesForBudget(budgetObj)
             budget.accordion.setPaycheckAmount()          
-            debugger
             progressBar = progressBar || new ProgressBar(budget.income, budget.expenseTotal())
           }
         })
@@ -51,6 +50,7 @@ class Budget {
       this.income = resp.income
       this.accordion.setPaycheckAmount()
       BudgetAccordion.renderIncomeTotal()
+      progressBar = progressBar || new ProgressBar(this.income, this.expenseTotal())
     })
   }
 

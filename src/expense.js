@@ -29,7 +29,7 @@ class Expense {
     delete Expense.all[this.id]
     expenseAccordion.updateTotal()
     Budget.findById(this.budget_id).accordion.setPaycheckAmount()
-    budget.accordion.setPaycheckAmount()
+    progressBar.update(Budget.incomeTotal() , Expense.total())
   }
 
   static reset() {
@@ -43,6 +43,7 @@ class Expense {
       this.amount = resp.amount
       this.expenseCell.update()
       expenseAccordion.updateTotal()
+      progressBar.update(Budget.incomeTotal() , Expense.total())
     }).then(()=> Budget.findById(this.budget_id).accordion.setPaycheckAmount()) 
   }
 
