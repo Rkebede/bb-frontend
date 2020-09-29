@@ -8,7 +8,11 @@ class ProgressBar{
 
   setProgressBar() {
     document.getElementById('progress').max = this.max
-    document.getElementById('progress').value = this.max
+    if (this.value === 0){
+      document.getElementById('progress').value = this.max
+    } else {
+      document.getElementById('progress').value = this.value
+    }
   }
 
   update(income, value){
