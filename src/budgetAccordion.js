@@ -39,7 +39,6 @@ class BudgetAccordion {
   setPaycheckAmount() {
     document.getElementById(this.budget.id).innerText = `Paycheck : $${this.income}`
     document.getElementById(`unallocated-${this.budget.id}`).innerText = `Unallocated Funds : $${this.income - this.budget.expenseTotal()}`
-
   }
 
   static renderIncomeTotal() {
@@ -59,4 +58,6 @@ class BudgetAccordion {
     form.setAttribute('id', 'expenses-form')
     accordion.appendChild(form)
   }
+
+  
 }

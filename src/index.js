@@ -1,6 +1,6 @@
 let accordionContainer = document.getElementById('uk-accordion')
 let expenseAccordion = null
-
+let progressBar = null
 
 document.addEventListener('DOMContentLoaded', () => {
   IncomeTypeForm.setEventListeners()

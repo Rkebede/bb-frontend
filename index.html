@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">  
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
-  <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist"></script>
   <script src="src/budget.js" charset="UTF-8"></script>
   <script src="src/budgetAccordion.js" charset="UTF-8"></script>
   <script src="src/accordion.js" charset="UTF-8"></script>
@@ -18,8 +17,9 @@
   <script src="src/expenseTable.js" charset="UTF-8"></script>
   <script src="src/expenseCell.js" charset="UTF-8"></script>
   <script src="src/incomeTypeForm.js" charset="UTF-8"></script>
+  <script src="src/progressBar.js" charset="UTF-8"></script>
+  
   <script src="src/requests.js" charset="UTF-8"></script>
-  <script src="src/piechart.js" charset="UTF-8"></script>
   <script type="application/javascript" defer src="src/index.js" charset="UTF-8"></script>
 </head>
 
@@ -49,6 +49,7 @@
     </li>
     <li>
       <div id="paycheck-tab" style="display: none;">
+        <progress id="progress" class="uk-progress" value="" max=""></progress>
         <div class="uk-padding" id="hidden-dropdown">
           <h1 style="display: inline;" id="total"></h1><br><br>
           <h2 style="display: inline;" id="unallocated"></h2>

@@ -21,11 +21,11 @@ class Budget {
           const budget = new Budget(budgetObj.id, budgetObj.income)
           if (budgetObj.expenses.length > 0) {
             budget.expenses = Expense.createExpensesForBudget(budgetObj)
-            budget.accordion.setPaycheckAmount()
+            budget.accordion.setPaycheckAmount()          
           }
         })
-        if (Expense.all.length > 0 && !expenseAccordion){
-          expenseAccordion = new ExpenseAccordion()        
+        if (!expenseAccordion){        
+          expenseAccordion = expenseAccordion || new ExpenseAccordion()
           expenseAccordion.appendAllExpenses()
         }
         showForms()

@@ -29,6 +29,7 @@ class Expense {
     delete Expense.all[this.id]
     expenseAccordion.updateTotal()
     Budget.findById(this.budget_id).accordion.setPaycheckAmount()
+    budget.accordion.setPaycheckAmount()
   }
 
   static reset() {
