@@ -1,6 +1,6 @@
 class ExpenseAccordion {
 
-  constructor(){
+  constructor() {
     this.expenseTable = new ExpenseTable()
     this.title = null
     this.findOrCreateExpenseAccordion()
@@ -8,7 +8,7 @@ class ExpenseAccordion {
 
   findOrCreateExpenseAccordion() {
     let expenseAccordion = document.createElement('li')
-    expenseAccordion.setAttribute('class','uk-sticky', 'bottom: true')
+    expenseAccordion.setAttribute('class', 'uk-sticky', 'bottom: true')
     accordionContainer.appendChild(expenseAccordion)
     const accordionContent = Accordion.createAccordionContent()
     this.title = Accordion.createAccordionTitle('all-expenses')
@@ -18,17 +18,17 @@ class ExpenseAccordion {
     accordionContent.appendChild(this.expenseTable.render())
   }
 
-  appendAllExpenses(){
-    Object.values(Expense.all).forEach((expense) =>{
+  appendAllExpenses() {
+    Object.values(Expense.all).forEach((expense) => {
       this.appendExpense(expense)
     })
   }
 
-  appendExpense(expense){
+  appendExpense(expense) {
     expense.expenseCell = new ExpenseCell(expense)
   }
 
-  updateTotal(){
+  updateTotal() {
     this.title.innerText = `All Expenses : $${Expense.total()}`
     document.getElementById('unallocated').innerText = `Unallocated Funds: $${Budget.incomeTotal() - Expense.total()}`
   }

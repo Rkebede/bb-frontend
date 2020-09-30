@@ -1,6 +1,6 @@
 class ExpenseCell {
 
-  constructor(expense){
+  constructor(expense) {
     this.expense = expense
     expenseAccordion.expenseTable.addExpenseCell(this)
   }
@@ -10,12 +10,10 @@ class ExpenseCell {
     document.getElementById(`cell-${this.expense.id}`).remove()
   }
 
-  update(){
+  update() {
     let cell = document.getElementById(`cell-${this.expense.id}`)
     cell.querySelector('#cell-name').innerText = this.expense.name
     cell.querySelector('#cell-amount').innerText = this.expense.amount
     expenseAccordion.updateTotal()
   }
-
-
 }

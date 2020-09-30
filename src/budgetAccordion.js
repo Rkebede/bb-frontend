@@ -26,7 +26,7 @@ class BudgetAccordion {
     budgetAccordion.appendChild(accordionContent)
     this.renderExpenseFormContainer()
   }
-  
+
   createAccordionSaveButton() {
     let eventFn = (e) => {
       e.preventDefault()
@@ -58,6 +58,4 @@ class BudgetAccordion {
     form.setAttribute('id', 'expenses-form')
     accordion.appendChild(form)
   }
-
-  
 }

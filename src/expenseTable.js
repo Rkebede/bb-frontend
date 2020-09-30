@@ -1,11 +1,11 @@
 class ExpenseTable {
-  constructor(){
-      this.tableBody = null
+  constructor() {
+    this.tableBody = null
   }
 
-  render() { 
+  render() {
     let table = document.createElement('table')
-    table.setAttribute('class', 'uk-table uk-table-striped') 
+    table.setAttribute('class', 'uk-table uk-table-striped')
     let tableHeaders = document.createElement('thead')
     table.appendChild(tableHeaders)
     let row = document.createElement('tr')
@@ -20,10 +20,10 @@ class ExpenseTable {
     amountHeader.innerText = "Amount"
     this.tableBody = document.createElement('tbody')
     table.appendChild(this.tableBody)
-    return table     
-}
+    return table
+  }
 
-  addExpenseCell(expenseCell){
+  addExpenseCell(expenseCell) {
     let table = this.tableBody
     let row = document.createElement('tr')
     row.setAttribute('id', `cell-${expenseCell.expense.id}`)
@@ -40,7 +40,4 @@ class ExpenseTable {
     row.appendChild(deleteButton)
     table.appendChild(row)
   }
-
-
-
 }

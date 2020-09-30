@@ -2,10 +2,8 @@ let accordionContainer = document.getElementById('uk-accordion')
 let expenseAccordion = null
 let progressBar = null
 
-document.addEventListener('DOMContentLoaded', () => {
-  IncomeTypeForm.setEventListeners()
-  Budget.getBudgets()
-})
+IncomeTypeForm.setEventListeners()
+Budget.getBudgets()
 
 const showForms = () => {
   document.getElementById('hidden-dropdown').style.display = 'block'

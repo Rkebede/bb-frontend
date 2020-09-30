@@ -22,7 +22,6 @@ class ExpenseForm {
     input.appendChild(saveButton)
     let deleteButton = this.deleteExpenseButton()
     input.appendChild(deleteButton)
-    
   }
 
   findOrCreateForm() {
@@ -74,5 +73,4 @@ class ExpenseForm {
   remove() {
     document.getElementById(this.expense.id).remove()
   }
-
 }

@@ -9,13 +9,11 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    })
-      .then(resp => resp.json())
+    }).then(resp => resp.json())
   }
 
   static getRequest(endPoint) {
-    return fetch(URL + endPoint)
-      .then(resp => resp.json())
+    return fetch(URL + endPoint).then(resp => resp.json())
   }
 
   static patchRequest(endPoint, body) {
@@ -25,8 +23,7 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    })
-      .then(resp => resp.json())
+    }).then(resp => resp.json())
   }
 
   static deleteRequest(endPoint, id = "") {
