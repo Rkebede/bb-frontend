@@ -50,7 +50,7 @@ class Budget {
       this.income = resp.income
       this.accordion.setPaycheckAmount()
       BudgetAccordion.renderIncomeTotal()
-      progressBar.update(this.income, this.expenseTotal())
+      progressBar.update()
     })
   }
 
