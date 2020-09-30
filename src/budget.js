@@ -59,12 +59,12 @@ class Budget {
   }
 
   static reset() {
-    API.deleteRequest('/budgets')
     this.all = {}
     document.getElementById('total').innerText = `Total Income : $0`
     document.getElementById('unallocated').innerText = `Unallocated Funds : $0`
     document.getElementById('uk-accordion').innerHTML = ''
-    progressBar = new ProgressBar()
+    progressBar = new ProgressBar()    
+    return API.deleteRequest('/budgets')
   }
 
   addExpense() {
