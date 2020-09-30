@@ -33,11 +33,12 @@ class ExpenseTable {
     let amount = document.createElement('td')
     amount.innerText = expenseCell.expense.amount
     amount.setAttribute('id', 'cell-amount')
-    let deleteButton = document.createElement('td')
-    deleteButton.appendChild(expenseCell.expense.expenseForm.deleteExpenseButton())
+    let deleteCell = document.createElement('td')
+    let deleteButton = expenseCell.expense.expenseForm.deleteExpenseButton()
+    deleteCell.appendChild(deleteButton)
     row.appendChild(name)
     row.appendChild(amount)
-    row.appendChild(deleteButton)
+    row.appendChild(deleteCell)
     table.appendChild(row)
   }
 }

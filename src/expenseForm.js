@@ -4,6 +4,7 @@ class ExpenseForm {
     this.expense = expense
     this.name = expense.name
     this.amount = expense.amount
+    this.saveButton = null
     this.renderExpenseFields()
   }
 
@@ -18,8 +19,9 @@ class ExpenseForm {
     let amount = this.expenseAmount()
     amount.setAttribute('class', `uk-input uk-width-1-3`)
     input.appendChild(amount)
-    let saveButton = this.saveExpenseButton()
-    input.appendChild(saveButton)
+    this.saveExpenseButton()
+    amount.addEventListener('change', (e) => { return this.saveButton.disabled = false })
+    input.appendChild(this.saveButton)
     let deleteButton = this.deleteExpenseButton()
     input.appendChild(deleteButton)
   }
@@ -57,8 +59,8 @@ class ExpenseForm {
         name: this.name, amount: this.amount
       })
     }
-    let saveButton = createButton('save-expense-button', 'Save', eventFn)
-    return saveButton
+    this.saveButton = createButton('save-expense-button', 'Save', eventFn)
+    
   }
 
   deleteExpenseButton() {
@@ -67,6 +69,7 @@ class ExpenseForm {
       this.expense.delete()
     }
     let deleteButton = createButton('expense-delete-button', 'Delete', eventFn)
+    this.saveButton.addEventListener('click', (e) => { return deleteButton.disabled = false })
     return deleteButton
   }
 

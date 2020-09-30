@@ -14,7 +14,10 @@ class BudgetAccordion {
     let incomeform = document.createElement('form')
     incomeform.setAttribute('id', 'income-form')
     const input = Accordion.createAccordionInput(this.income)
-    input.addEventListener('change', (e) => { this.income = e.target.value })
+    input.addEventListener('change', (e) => { 
+      e.target.nextElementSibling.disabled = false
+      this.income = e.target.value 
+    })
     incomeform.appendChild(input)
     const unallocated = document.createElement('h4')
     unallocated.setAttribute('id', `unallocated-${this.budget.id}`)
@@ -24,7 +27,7 @@ class BudgetAccordion {
     incomeform.appendChild(saveButton)
     accordionContent.appendChild(incomeform)
     budgetAccordion.appendChild(accordionContent)
-    this.renderExpenseFormContainer()
+    this.renderExpenseFormContainer(saveButton)    
   }
 
   createAccordionSaveButton() {
@@ -39,6 +42,7 @@ class BudgetAccordion {
   setPaycheckAmount() {
     document.getElementById(this.budget.id).innerText = `Paycheck : $${this.income}`
     document.getElementById(`unallocated-${this.budget.id}`).innerText = `Unallocated Funds : $${this.income - this.budget.expenseTotal()}`
+  
   }
 
   static renderIncomeTotal() {
@@ -46,13 +50,15 @@ class BudgetAccordion {
     document.getElementById('unallocated').innerText = `Unallocated Funds: $${Budget.incomeTotal() - Expense.total()}`
   }
 
-  renderExpenseFormContainer() {
+  renderExpenseFormContainer(saveButton) {
     let accordion = document.getElementById(this.budget.id).nextElementSibling
     let expenseHeader = document.createElement('h1')
     expenseHeader.innerText = 'Expense'
     accordion.appendChild(expenseHeader)
     let eventFn = (e) => this.budget.addExpense()
     let button = createButton('new-expense', 'Add Expense', eventFn)
+    saveButton.addEventListener('click', () => { button.disabled = false })
+    this.income ? button.disabled = false : button.disabled = true 
     accordion.appendChild(button)
     let form = document.createElement('form')
     form.setAttribute('id', 'expenses-form')

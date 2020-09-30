@@ -1,6 +1,7 @@
 class IncomeTypeForm {
 
   static setEventListeners() {
+    document.getElementById('income-dropdown').addEventListener('change', (e) => { return e.target.nextElementSibling.disabled = false })
     document.getElementById('income-dropdown').addEventListener('submit', this.saveIncomeType)
   }
 
