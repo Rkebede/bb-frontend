@@ -1,26 +1,24 @@
 class ProgressBar{
   
-  constructor(max, value){
-    this.max = max
-    this.value = value
+  constructor(){
     this.setProgressBar()
   }
 
   setProgressBar() {
    let bar = document.getElementById('progress')
-    bar.max = this.max
+    bar.max = Budget.incomeTotal()
     if (this.value === 0){
-      bar.value = this.max
+      bar.value = Budget.incomeTotal()
       // bar.setAttribute('class', 'uk-progress-success')
     } else {
-      document.getElementById('progress').value = this.value
+      document.getElementById('progress').value = Budget.incomeTotal() - Expense.total()
     }
   }
 
   update(income, value){
     let bar = document.getElementById('progress')
-    bar.max = (income)
-    bar.value = (income - value)
+    bar.max = Budget.incomeTotal()
+    bar.value = (Budget.incomeTotal() - Expense.total())
     // if (bar.value < (bar.max * 0.3)){
     //   bar.setAttribute('class', 'uk-progress-danger')
     // } else {

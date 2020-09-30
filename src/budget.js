@@ -22,7 +22,7 @@ class Budget {
           if (budgetObj.expenses.length > 0) {
             budget.expenses = Expense.createExpensesForBudget(budgetObj)
             budget.accordion.setPaycheckAmount()          
-            progressBar = progressBar || new ProgressBar(budget.income, budget.expenseTotal())
+            progressBar = progressBar || new ProgressBar()
           }
         })
         if (!expenseAccordion){        
@@ -64,7 +64,7 @@ class Budget {
     document.getElementById('total').innerText = `Total Income : $0`
     document.getElementById('unallocated').innerText = `Unallocated Funds : $0`
     document.getElementById('uk-accordion').innerHTML = ''
-    progressBar = new ProgressBar(Budget.incomeTotal(), Expense.total())
+    progressBar = new ProgressBar()
   }
 
   addExpense() {
