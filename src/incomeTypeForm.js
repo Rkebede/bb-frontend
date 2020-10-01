@@ -18,5 +18,6 @@ class IncomeTypeForm {
       Expense.reset()
       Budget.createBudgets(value)
     })
+    
   }
 } 

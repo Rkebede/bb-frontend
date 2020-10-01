@@ -9,11 +9,15 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    }).then(resp => resp.json())
+    })
+    .then(resp => resp.json())
+    .catch(this.errorHandling)
   }
 
   static getRequest(endPoint) {
-    return fetch(URL + endPoint).then(resp => resp.json())
+    return fetch(URL + endPoint)
+    .then(resp => resp.json())
+    .catch(this.errorHandling)
   }
 
   static patchRequest(endPoint, body) {
@@ -23,12 +27,28 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    }).then(resp => resp.json())
+    })
+    .then(resp => resp.json())
+    .catch(this.errorHandling)
   }
 
   static deleteRequest(endPoint, id = "") {
     return fetch(URL + endPoint + id, {
       method: "DELETE"
     })
+    .catch(this.errorHandling)
   }
+
+  static errorHandling(error) {
+    let element = document.createElement('div')
+    element.setAttribute('class', 'uk-alert-danger')
+    let close = document.createElement('a')
+    close.setAttribute('class', 'uk-alert-close')
+    let closeComponent = UIkit.close(close)
+    let alert = UIkit.alert(element)
+    alert.$el.innerText = error.message
+    alert.$el.appendChild(closeComponent.$el)
+    document.getElementById('body').prepend(alert.$el)
+  }
+
 }
