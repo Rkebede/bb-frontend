@@ -25,18 +25,6 @@ class ExpenseAccordion {
     
     saveSearch.addEventListener('click', (e)=>{
       let searchInput = e.target.previousElementSibling.value
-      // for(let x in Expense.all){ 
-      //   if (Expense.all[x].amount > searchInput){
-      //     Expense.all[x].expenseCell.remove()
-      //   }
-      // }
-
-      //  let filtered = Object.values(Expense.all).filter((expense) =>{ 
-      //     expense.expenseCell.remove()
-      //     return expense.amount <= searchInput
-      //   })
-      //   filtered.forEach((expense) => { new ExpenseCell(expense)})
-
       Object.values(Expense.all).forEach((expense) => { 
         if (expense.amount > searchInput){ expense.expenseCell.remove()}
        })
